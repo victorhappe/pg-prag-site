@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PG Prag 2026</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <a href="#home" class="logo">PG PRAG</a>
+    <button class="menu-btn" aria-label="Åbn menu">☰</button>
+    <nav class="nav">
+      <a href="#fredag">Fredag</a>
+      <a href="#loerdag">Lørdag</a>
+      <a href="#hold">Hold</a>
+      <a href="#games">P Games</a>
+      <a href="#skattejagt">Skattejagt</a>
+    </nav>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-overlay">
+        <p class="eyebrow">The official pub golf championship</p>
+        <h1>PG Prag 2026</h1>
+        <p>9 drenge. 3 hold. Én by. Én vinder.</p>
+        <a href="#countdown" class="btn">Se countdown</a>
+      </div>
+    </section>
+
+    <section id="countdown" class="section countdown-section">
+      <p class="eyebrow">Lørdag d. 11. juli kl. 12:00</p>
+      <h2>PG starter om</h2>
+      <div class="countdown">
+        <div><span id="days">00</span>
+          <p>Dage</p>
+        </div>
+        <div><span id="hours">00</span>
+          <p>Timer</p>
+        </div>
+        <div><span id="minutes">00</span>
+          <p>Minutter</p>
+        </div>
+        <div><span id="seconds">00</span>
+          <p>Sekunder</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section warning">
+      <h2>Disclaimer</h2>
+      <p>Selvrisiko på skade af Airbnb + ingen stive i poolen + ingen drinks på poolbordet.</p>
+    </section>
+
+    <section id="fredag" class="section">
+      <p class="eyebrow">Dag 1</p>
+      <h2>Fredag</h2>
+      <div class="timeline">
+        <article class="timeline-card"><span>10:00</span>
+          <h3>Københavns Lufthavn</h3>
+          <p>Øl i lufthavnen.</p>
+        </article>
+        <article class="timeline-card"><span>Ca. 15:00</span>
+          <h3>Ankomst i suiten</h3>
+          <p>Holdkaptajner og teammaking.</p>
+        </article>
+        <article class="timeline-card"><span>ASAP – 19:45</span>
+          <h3>Kostume, holdvideo og skattejagt</h3>
+          <p>Minuspoint pr. minut forsinket. Happe og Mads køber ind og pynter op.</p>
+        </article>
+        <article class="timeline-card"><span>20:00</span>
+          <h3>Medieval Dinner - U Pavouka Medieval Tavern</h3>
+          <p>2.5h performance - 5 course meal - All you can drink</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="loerdag" class="section secret-section">
+      <p class="eyebrow">Dag 2</p>
+      <h2>Lørdag</h2>
+      <div class="secret-card">
+        <div class="lock">🔒</div>
+        <h3>Ruten er hemmelig</h3>
+        <p>Kun dommerholdet kender den fulde PG-rute. Deltagerne får kun nødvendige informationer undervejs.</p>
+        <button class="btn" id="judgeBtn">Dommer-login</button>
+        <div id="judgePanel" class="judge-panel hidden">
+          <h3>Dommerinfo</h3>
+          <ul>
+            <li>09:00–11:00: Morgenmad</li>
+            <li>12:00: PG START + holdvideoer + skattejagtsvinder</li>
+            <li>Stop 1: Suiten — Sauna Mania, Cocktail Crashout, Pub Race</li>
+            <li>Stop 2: Rocky O'Reilly's — Bar Race</li>
+            <li>Stop 3: Oktoberfest Pub — Tid, timing og talent</li>
+            <li>Stop 4: Valhalla Beer Club — Styr på procenten</li>
+            <li>Stop 5: Fat Cat Downtown — Hyggestop</li>
+            <li>Stop 6: Jáma Garden Pub — Pop quiz / gameshow</li>
+            <li>Stop 7: My People Bar — Vodka Vand</li>
+            <li>Stop 8: The Dubliner — Blind Beer</li>
+            <li>Stop 9: Airbnb afterparty — vinder announced</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="hold" class="section">
+      <p class="eyebrow">Teams</p>
+      <h2>Holdene</h2>
+      <div class="cards three">
+        <article class="card">
+          <h3>Team Kammerklunker</h3>
+          <p>Point: <strong>0 PGP</strong></p>
+        </article>
+        <article class="card">
+          <h3>Team Whatever</h3>
+          <p>Point: <strong>0 PGP</strong></p>
+        </article>
+        <article class="card">
+          <h3>Team Bagtroppen</h3>
+          <p>Point: <strong>0 PGP</strong></p>
+        </article>
+      </div>
+    </section>
+
+    <section id="games" class="section dark">
+      <p class="eyebrow">Challenges</p>
+      <h2>P Games</h2>
+      <div class="game-grid" id="gameGrid"></div>
+    </section>
+
+    <section id="skattejagt" class="section">
+      <p class="eyebrow">Pre points</p>
+      <h2>Skattejagt</h2>
+      <div class="rules">
+        <p>Alle klarede challenges skal bevises med billede eller video til dommerholdet.</p>
+        <p>Alle på holdet skal være med i billedet/videoen.</p>
+        <p>Hver challenge er ét præpoint værd.</p>
+      </div>
+      <div class="checklist" id="huntList"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>PG Prag 2026 · Hosted by Happe & Mads</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
