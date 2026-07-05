@@ -138,3 +138,97 @@ document.querySelectorAll(".hunt-item input").forEach((input) => {
     localStorage.setItem(input.dataset.id, input.checked);
   });
 });
+
+const teamPoints = {
+  team1: Number(localStorage.getItem("team1")) || 0,
+  team2: Number(localStorage.getItem("team2")) || 0,
+  team3: Number(localStorage.getItem("team3")) || 0,
+};
+
+function updateLeaderboard() {
+  document.querySelector("#team1Points").textContent = teamPoints.team1;
+  document.querySelector("#team2Points").textContent = teamPoints.team2;
+  document.querySelector("#team3Points").textContent = teamPoints.team3;
+}
+
+function changePoints(team, amount) {
+  teamPoints[team] += amount;
+  localStorage.setItem(team, teamPoints[team]);
+  updateLeaderboard();
+}
+
+updateLeaderboard();
+
+const randomGameBtn = document.querySelector("#randomGameBtn");
+const randomGameResult = document.querySelector("#randomGameResult");
+
+randomGameBtn.addEventListener("click", () => {
+  const randomIndex = Math.floor(Math.random() * games.length);
+  randomGameResult.textContent = `🎲 ${games[randomIndex]}`;
+});
+
+function updateHuntProgress() {
+  const checkboxes = document.querySelectorAll(".hunt-item input");
+  const checked = document.querySelectorAll(".hunt-item input:checked").length;
+  const total = checkboxes.length;
+  const percentage = (checked / total) * 100;
+
+  document.querySelector("#huntProgress").style.width = `${percentage}%`;
+  document.querySelector("#huntProgressText").textContent = `${checked} / ${total} challenges klaret`;
+}
+
+document.querySelectorAll(".hunt-item input").forEach((input) => {
+  input.addEventListener("change", updateHuntProgress);
+});
+
+updateHuntProgress();
+
+const players = [
+  { name: "Alfred Spikes", rating: 87, role: "Kaptajn", team: "Team Kammerklunker", img: "images/alfred.jpg", move: "Split the G", strength: "Tempo", weakness: "Vodka Vand" },
+  { name: "Dirty Hashlund", rating: 84, role: "Player", team: "Dommerholdet", img: "images/anton.jpg", move: "Dommerblik", strength: "Overblik", weakness: "Ingen" },
+  { name: "Lithium", rating: 89, role: "Kaptajn", team: "Team Whatever", img: "images/august.jpg", move: "Bar Race", strength: "Gruppepres", weakness: "Mlíko" },
+  { name: "Dobbelt Felix", rating: 82, role: "Player", team: "Team Bagtroppen", img: "images/felix.jpg", move: "Pub Race", strength: "Charme", weakness: "Timing" },
+  { name: "Joey", rating: 80, role: "Striker", team: "Team Whatever", img: "images/joseph.jpg", move: "Scorekort", strength: "Quiz", weakness: "Vodka Vand" },
+  { name: "14", rating: 85, role: "Winger", team: "Team Bagtroppen", img: "images/kjartan.jpg", move: "Sprint til bar", strength: "Fart", weakness: "ABV" },
+  { name: "Kåre Nivå fra Duvå", rating: 81, role: "Defender", team: "Team Kammerklunker", img: "images/kaare.jpg", move: "Vandpause", strength: "Stabilitet", weakness: "IPA" },
+  { name: "Hyggestoppet", rating: 83, role: "Dommer", team: "Dommerholdet", img: "images/mads.jpg", move: "PG Mastermind", strength: "Planlægning", weakness: "Poolbord" },
+  { name: "Pony Toby", rating: 86, role: "Attacker", team: "Team Whatever", img: "images/tobias.jpg", move: "Shotgun", strength: "Energi", weakness: "Sauna" },
+  { name: "Praktikanten", rating: 88, role: "Dommer", team: "Dommerholdet", img: "images/victor.jpg", move: "Rules Lawyer", strength: "Dommerblik", weakness: "Hyggestop" },
+  { name: "Victatoren", rating: 83, role: "Extra", team: "Team Bagtroppen", img: "images/kramp.jpg", move: "Wildcard", strength: "Kaos", weakness: "Skumskæg" },
+];
+
+const playerGrid = document.querySelector("#playerGrid");
+
+players.forEach((player) => {
+  playerGrid.innerHTML += `
+    <article class="player-card">
+      <div class="player-card-inner">
+        <div class="player-front">
+          <div class="player-top">
+            <div>
+              <span class="player-rating">${player.rating}</span>
+              <span class="player-role">${player.role}</span>
+            </div>
+            <span class="flag">🇩🇰</span>
+          </div>
+
+          <img src="${player.img}" alt="${player.name}" class="player-img">
+
+          <div class="player-name">${player.name}</div>
+
+          <div class="player-badge">
+            <i class="fa-solid fa-beer-mug-empty"></i>
+          </div>
+        </div>
+
+        <div class="player-back">
+          <h3>${player.name}</h3>
+          <p><strong>Hold</strong><br>${player.team}</p>
+          <p><strong>Special move</strong><br>${player.move}</p>
+          <p><strong>Styrke</strong><br>${player.strength}</p>
+          <p><strong>Svaghed</strong><br>${player.weakness}</p>
+        </div>
+      </div>
+    </article>
+  `;
+});

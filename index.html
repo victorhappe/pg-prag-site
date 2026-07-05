@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PG Prag 2026</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 
 <body>
@@ -18,6 +19,14 @@
       <a href="#hold">Hold</a>
       <a href="#games">P Games</a>
       <a href="#skattejagt">Skattejagt</a>
+      <a href="#participants">
+        <i class="fa-solid fa-users"></i> PG Deltagere
+      </a>
+
+      <a href="https://open.spotify.com/playlist/5FTdcrI0ut4DppjzQQKWPj?si=WfDNHg0nTfiheeEJktAtrw" target="_blank"
+        class="spotify-link">
+        <i class="fa-brands fa-spotify"></i> Playlist
+      </a>
     </nav>
   </header>
 
@@ -48,6 +57,49 @@
           <p>Sekunder</p>
         </div>
       </div>
+    </section>
+
+    <section id="leaderboard" class="section leaderboard-section">
+      <p class="eyebrow">Live status</p>
+      <h2>Leaderboard</h2>
+
+      <div class="leaderboard">
+        <article class="leader-card">
+          <h3>Team Kammerklunker</h3>
+          <p><span id="team1Points">0</span> PGP</p>
+          <button class="small-btn" onclick="changePoints('team1', 1)">+1</button>
+          <button class="small-btn" onclick="changePoints('team1', -1)">-1</button>
+        </article>
+
+        <article class="leader-card">
+          <h3>Team Whatever</h3>
+          <p><span id="team2Points">0</span> PGP</p>
+          <button class="small-btn" onclick="changePoints('team2', 1)">+1</button>
+          <button class="small-btn" onclick="changePoints('team2', -1)">-1</button>
+        </article>
+
+        <article class="leader-card">
+          <h3>Team Bagtroppen</h3>
+          <p><span id="team3Points">0</span> PGP</p>
+          <button class="small-btn" onclick="changePoints('team3', 1)">+1</button>
+          <button class="small-btn" onclick="changePoints('team3', -1)">-1</button>
+        </article>
+      </div>
+    </section>
+
+    <section id="participants" class="section participants-section">
+      <p class="eyebrow">Hall of Fame</p>
+      <h2>PG Deltagere</h2>
+      <p class="section-intro">11 legender. 3 hold. 1 mission.</p>
+
+      <div class="player-grid" id="playerGrid"></div>
+    </section>
+
+    <section class="section random-section">
+      <p class="eyebrow">Emergency game</p>
+      <h2>Random Challenge</h2>
+      <button class="btn" id="randomGameBtn">Træk en challenge</button>
+      <div id="randomGameResult" class="random-result">🎲 Klar?</div>
     </section>
 
     <section class="section warning">
@@ -108,19 +160,42 @@
     <section id="hold" class="section">
       <p class="eyebrow">Teams</p>
       <h2>Holdene</h2>
+
       <div class="cards three">
-        <article class="card">
-          <h3>Team Kammerklunker</h3>
-          <p>Point: <strong>0 PGP</strong></p>
+
+        <article class="card team-card">
+          <h3>🏆 Team Kammerklunker</h3>
+          <p class="captain">Kaptajn: Smidt</p>
+
+          <ul class="team-list">
+            <li>👤 ?</li>
+            <li>👤 ?</li>
+            <li>👤 ?</li>
+          </ul>
         </article>
-        <article class="card">
-          <h3>Team Whatever</h3>
-          <p>Point: <strong>0 PGP</strong></p>
+
+        <article class="card team-card">
+          <h3>🍺 Team Whatever</h3>
+          <p class="captain">Kaptajn: Helger</p>
+
+          <ul class="team-list">
+            <li>👤 ?</li>
+            <li>👤 ?</li>
+            <li>👤 ?</li>
+          </ul>
         </article>
-        <article class="card">
-          <h3>Team Bagtroppen</h3>
-          <p>Point: <strong>0 PGP</strong></p>
+
+        <article class="card team-card">
+          <h3>🎯 Team Bagtroppen</h3>
+          <p class="captain">Kaptajn: Tubs</p>
+
+          <ul class="team-list">
+            <li>👤 ?</li>
+            <li>👤 ?</li>
+            <li>👤 ?</li>
+          </ul>
         </article>
+
       </div>
     </section>
 
@@ -137,6 +212,14 @@
         <p>Alle klarede challenges skal bevises med billede eller video til dommerholdet.</p>
         <p>Alle på holdet skal være med i billedet/videoen.</p>
         <p>Hver challenge er ét præpoint værd.</p>
+      </div>
+
+      <div class="hunt-progress-box">
+        <h3>Skattejagt progress</h3>
+        <div class="progress-bar">
+          <div id="huntProgress"></div>
+        </div>
+        <p id="huntProgressText">0 / 60 challenges klaret</p>
       </div>
       <div class="checklist" id="huntList"></div>
     </section>
