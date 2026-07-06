@@ -7,6 +7,7 @@
   <title>PG Prag 2026</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 
 <body>
@@ -133,26 +134,32 @@
     <section id="loerdag" class="section secret-section">
       <p class="eyebrow">Dag 2</p>
       <h2>Lørdag</h2>
-      <div class="secret-card">
-        <div class="lock">🔒</div>
-        <h3>Ruten er hemmelig</h3>
-        <p>Kun dommerholdet kender den fulde PG-rute. Deltagerne får kun nødvendige informationer undervejs.</p>
-        <button class="btn" id="judgeBtn">Dommer-login</button>
-        <div id="judgePanel" class="judge-panel hidden">
-          <h3>Dommerinfo</h3>
-          <ul>
-            <li>09:00–11:00: Morgenmad</li>
-            <li>12:00: PG START + holdvideoer + skattejagtsvinder</li>
-            <li>Stop 1: Suiten — Sauna Mania, Cocktail Crashout, Pub Race</li>
-            <li>Stop 2: Rocky O'Reilly's — Bar Race</li>
-            <li>Stop 3: Oktoberfest Pub — Tid, timing og talent</li>
-            <li>Stop 4: Valhalla Beer Club — Styr på procenten</li>
-            <li>Stop 5: Fat Cat Downtown — Hyggestop</li>
-            <li>Stop 6: Jáma Garden Pub — Pop quiz / gameshow</li>
-            <li>Stop 7: My People Bar — Vodka Vand</li>
-            <li>Stop 8: The Dubliner — Blind Beer</li>
-            <li>Stop 9: Airbnb afterparty — vinder announced</li>
-          </ul>
+
+      <div class="judge-access">
+        <div class="judge-locked" id="judgeLocked">
+          <div class="lock">🔒</div>
+          <h3>Dommer-adgang</h3>
+          <p>Kun dommerholdet kan se den fulde PG-rute.</p>
+          <button class="btn" id="judgeBtn">Lås ruten op</button>
+        </div>
+
+        <div id="judgePanel" class="judge-route hidden">
+          <div class="route-header">
+            <div>
+              <p class="eyebrow">Secret Course Map</p>
+              <h3>PG-ruten</h3>
+              <p>Airbnb → barer → Airbnb afterparty</p>
+            </div>
+
+            <a href="#" target="_blank" id="mapsLink" class="btn">
+              Åbn i Google Maps
+            </a>
+          </div>
+
+          <div class="route-layout">
+            <div id="pgMap" class="pg-map"></div>
+            <div class="route-list" id="routeList"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -229,6 +236,7 @@
     <p>PG Prag 2026 · Hosted by Happe & Mads</p>
   </footer>
 
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="script.js"></script>
 </body>
 

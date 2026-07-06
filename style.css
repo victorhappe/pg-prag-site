@@ -529,3 +529,131 @@ footer {
 .player-back p {
   margin: 13px 0;
 }
+
+.judge-access {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.judge-locked {
+  background: #211a17;
+  border: 1px solid rgba(245, 193, 93, 0.25);
+  border-radius: 32px;
+  padding: 70px 30px;
+  text-align: center;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+}
+
+.judge-route {
+  background: radial-gradient(circle at top left, rgba(245, 193, 93, 0.18), transparent 35%), #15110f;
+  border: 1px solid rgba(245, 193, 93, 0.35);
+  border-radius: 32px;
+  padding: 32px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+}
+
+.route-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.route-header h3 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  margin: 0;
+  color: #f5c15d;
+  text-transform: uppercase;
+}
+
+.pg-map {
+  width: 100%;
+  min-height: 650px;
+  border-radius: 28px;
+  border: 2px solid #f5c15d;
+  overflow: hidden;
+}
+
+.route-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr;
+  gap: 24px;
+}
+
+.route-list {
+  display: grid;
+  gap: 12px;
+}
+
+.route-stop-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 14px;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(245, 193, 93, 0.22);
+  border-radius: 18px;
+  padding: 16px;
+}
+
+.route-number {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 2px solid #f5c15d;
+  color: #f5c15d;
+  font-weight: 900;
+}
+
+.route-stop-card h4 {
+  margin: 0 0 4px;
+  color: #f5c15d;
+}
+
+.route-stop-card p {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.route-stop-card small {
+  display: block;
+  margin-top: 4px;
+  color: #b8aaa0;
+}
+
+.route-time {
+  color: #f5c15d;
+  font-weight: 900;
+}
+
+@media (max-width: 900px) {
+  .route-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .pg-map {
+    min-height: 520px;
+  }
+}
+
+.number-marker {
+  background: transparent;
+  border: none;
+}
+
+.number-marker span {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #120f0d;
+  color: #f5c15d;
+  border: 3px solid #f5c15d;
+  font-weight: 900;
+  font-size: 1rem;
+  box-shadow: 0 0 18px rgba(245, 193, 93, 0.55);
+}

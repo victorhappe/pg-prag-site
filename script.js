@@ -37,18 +37,111 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
+const routeStops = [
+  {
+    number: 1,
+    time: "12:00",
+    name: "Airbnb – Suiten",
+    game: "Sauna Mania, Cocktail Crashout, Pub Race",
+    address: "Smíchov, 150 00 Prag 5, Tjekkiet",
+  },
+  {
+    number: 2,
+    time: "13:30",
+    name: "Rocky O'Reilly's",
+    game: "Bar Race",
+    address: "Štěpánská 32, 110 00 Nové Město, Tjekkiet",
+  },
+  {
+    number: 3,
+    time: "14:45",
+    name: "Oktoberfest Pub",
+    game: "Tid, timing og talent",
+    address: "Rytířská 411/4, 110 00 Staré Město, Tjekkiet",
+  },
+  {
+    number: 4,
+    time: "16:00",
+    name: "Valhalla Beer Club",
+    game: "Styr på procenten",
+    address: "Vodičkova 36, 110 00 Nové Město, Tjekkiet",
+  },
+  {
+    number: 5,
+    time: "17:15",
+    name: "Fat Cat Downtown",
+    game: "Hyggestop",
+    address: "Karlova 44, 110 00 Staré Město, Tjekkiet",
+  },
+  {
+    number: 6,
+    time: "18:30",
+    name: "Jáma Garden Pub",
+    game: "Pop quiz / gameshow",
+    address: "V Jámě 1671/7, 110 00 Nové Město, Tjekkiet",
+  },
+  {
+    number: 7,
+    time: "19:45",
+    name: "My People Bar",
+    game: "Vodka Vand",
+    address: "Michalská 970/20, 110 00 Staré Město, Tjekkiet",
+  },
+  {
+    number: 8,
+    time: "21:00",
+    name: "The Dubliner",
+    game: "Blind Beer",
+    address: "Týn 639/1, 110 00 Staré Město, Tjekkiet",
+  },
+  {
+    number: 9,
+    time: "22:30+",
+    name: "Airbnb – Afterparty",
+    game: "Vinder announced",
+    address: "Smíchov, 150 00 Prag 5, Tjekkiet",
+  },
+];
+
 const judgeBtn = document.querySelector("#judgeBtn");
 const judgePanel = document.querySelector("#judgePanel");
+const judgeLocked = document.querySelector("#judgeLocked");
+const routeList = document.querySelector("#routeList");
+const mapsLink = document.querySelector("#mapsLink");
 
 judgeBtn.addEventListener("click", () => {
   const code = prompt("Indtast dommerkode:");
+
   if (code === "dirtyhaslund") {
+    judgeLocked.classList.add("hidden");
     judgePanel.classList.remove("hidden");
-    judgeBtn.textContent = "Dommerinfo åbnet";
-  } else {
-    alert("Forkert kode. Ruten forbliver hemmelig.");
+    renderRoute();
+    loadPgRouteMap();
   }
 });
+
+function renderRoute() {
+  routeList.innerHTML = "";
+
+  routeStops.forEach((stop) => {
+    routeList.innerHTML += `
+      <article class="route-stop-card">
+        <div class="route-number">${stop.number}</div>
+
+        <div>
+          <h4>${stop.name}</h4>
+          <p>${stop.game}</p>
+          <small>${stop.address}</small>
+        </div>
+
+        <span class="route-time">${stop.time}</span>
+      </article>
+    `;
+  });
+
+  const addresses = routeStops.map((stop) => encodeURIComponent(stop.address)).join("/");
+  mapsLink.href = `https://www.google.com/maps/dir/${addresses}`;
+}
 
 const games = ["Tid mod timing", "Split the G", "Ikke bestil samme øl som en anden", "Gæt ABV", "Øl i strakt arm", "Fodres øl", "Øl stafet", "Hyggestop", "Pub Race", "Hink en Nisse", "Meyer / Hestevædeløb", "Bund en øl", "Vodka Vand", "Øl må ikke røre bord", "Bund med sugerør", "Bedste skumskæg"];
 
@@ -341,3 +434,49 @@ players.forEach((player) => {
     </article>
   `;
 });
+
+let pgMapInitialized = false;
+
+function loadPgRouteMap() {
+  if (pgMapInitialized) return;
+  pgMapInitialized = true;
+
+  const map = L.map("pgMap").setView([50.0755, 14.4378], 13);
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: "© OpenStreetMap",
+  }).addTo(map);
+
+  const stops = [
+    [50.062802, 14.409415], // 1 Airbnb
+    [50.07968257024647, 14.42595589698607], // 2 Rocky
+    [50.0840296734399, 14.421169996986292], // 3 Oktoberfest
+    [50.08151624966299, 14.425433754657204], // 4 Valhalla
+    [50.08626944937062, 14.418742239315312], // 5 Fat Cat
+    [50.08016105374984, 14.42540869513737], // 6 Jáma
+    [50.086395632939066, 14.420287881644283], // 7 My People
+    [50.088192345804345, 14.423215510479924], // 8 Dubliner
+    [50.062802, 14.409415], // 9 Airbnb
+  ];
+
+  routeStops.forEach((stop, index) => {
+    const numberIcon = L.divIcon({
+      className: "number-marker",
+      html: `<span>${stop.number}</span>`,
+      iconSize: [38, 38],
+      iconAnchor: [19, 19],
+    });
+
+    L.marker(stops[index], { icon: numberIcon }).addTo(map).bindPopup(`<strong>${stop.number}. ${stop.name}</strong><br>${stop.game}<br>${stop.address}`);
+  });
+
+  L.polyline(stops, {
+    color: "#f5c15d",
+    weight: 5,
+    opacity: 0.9,
+    dashArray: "10, 10",
+  }).addTo(map);
+
+  map.fitBounds(stops);
+}
