@@ -184,17 +184,126 @@ document.querySelectorAll(".hunt-item input").forEach((input) => {
 updateHuntProgress();
 
 const players = [
-  { name: "Alfred Spikes", rating: 87, role: "Kaptajn", team: "Team Kammerklunker", img: "images/alfred.jpg", move: "Split the G", strength: "Tempo", weakness: "Vodka Vand" },
-  { name: "Dirty Hashlund", rating: 84, role: "Player", team: "Dommerholdet", img: "images/anton.jpg", move: "Dommerblik", strength: "Overblik", weakness: "Ingen" },
-  { name: "Lithium", rating: 89, role: "Kaptajn", team: "Team Whatever", img: "images/august.jpg", move: "Bar Race", strength: "Gruppepres", weakness: "Mlíko" },
-  { name: "Dobbelt Felix", rating: 82, role: "Player", team: "Team Bagtroppen", img: "images/felix.jpg", move: "Pub Race", strength: "Charme", weakness: "Timing" },
-  { name: "Joey", rating: 80, role: "Striker", team: "Team Whatever", img: "images/joseph.jpg", move: "Scorekort", strength: "Quiz", weakness: "Vodka Vand" },
-  { name: "14", rating: 85, role: "Winger", team: "Team Bagtroppen", img: "images/kjartan.jpg", move: "Sprint til bar", strength: "Fart", weakness: "ABV" },
-  { name: "Kåre Nivå fra Duvå", rating: 81, role: "Defender", team: "Team Kammerklunker", img: "images/kaare.jpg", move: "Vandpause", strength: "Stabilitet", weakness: "IPA" },
-  { name: "Hyggestoppet", rating: 83, role: "Dommer", team: "Dommerholdet", img: "images/mads.jpg", move: "PG Mastermind", strength: "Planlægning", weakness: "Poolbord" },
-  { name: "Pony Toby", rating: 86, role: "Attacker", team: "Team Whatever", img: "images/tobias.jpg", move: "Shotgun", strength: "Energi", weakness: "Sauna" },
-  { name: "Praktikanten", rating: 88, role: "Dommer", team: "Dommerholdet", img: "images/victor.jpg", move: "Rules Lawyer", strength: "Dommerblik", weakness: "Hyggestop" },
-  { name: "Victatoren", rating: 83, role: "Extra", team: "Team Bagtroppen", img: "images/kramp.jpg", move: "Wildcard", strength: "Kaos", weakness: "Skumskæg" },
+  {
+    name: "Alfred Spikes",
+    rating: 87,
+    role: "Captain",
+    team: "Team Kammerklunker",
+    img: "images/alfred.jpg",
+    move: "Split the G",
+    strength: "Shotgun",
+    weakness: "Vodka Vand",
+  },
+
+  {
+    name: "Dirty Hashlund",
+    rating: 84,
+    role: "Putter",
+    team: "Team Kammerklunker",
+    img: "images/anton.jpg",
+    move: "Being Dirty",
+    strength: "Bar Games",
+    weakness: "Stout",
+  },
+
+  {
+    name: "Lithium",
+    rating: 89,
+    role: "Captain",
+    team: "Team Whatever",
+    img: "images/august.jpg",
+    move: "Split the G",
+    strength: "Hyggestop",
+    weakness: "Mlíko",
+  },
+
+  {
+    name: "Dobbelt Felix",
+    rating: 82,
+    role: "Birdie Hunter",
+    team: "Team Bagtroppen",
+    img: "images/felix.jpg",
+    move: "Pub Race",
+    strength: "Bund en øl",
+    weakness: "Ølquiz",
+  },
+
+  {
+    name: "Joey",
+    rating: 80,
+    role: "Rookie",
+    team: "Team Whatever",
+    img: "images/joseph.jpg",
+    move: "Lucky Bounce",
+    strength: "Lokal Charme",
+    weakness: "Vodka Vand",
+  },
+
+  {
+    name: "14",
+    rating: 85,
+    role: "Long Driver",
+    team: "Team Bagtroppen",
+    img: "images/kjartan.jpg",
+    move: "Beer Sprint",
+    strength: "Tempo",
+    weakness: "Styr på Procenten",
+  },
+
+  {
+    name: "Kåre Nivå fra Duvå",
+    rating: 81,
+    role: "Iron Player",
+    team: "Team Kammerklunker",
+    img: "images/kaare.jpg",
+    move: "Water Hazard",
+    strength: "Stabil Bund",
+    weakness: "IPA",
+  },
+
+  {
+    name: "Hyggestoppet",
+    rating: 83,
+    role: "Referee",
+    team: "Dommerholdet",
+    img: "images/mads.jpg",
+    move: "Rulebook",
+    strength: "Saunamania",
+    weakness: "Vodka Vand",
+  },
+
+  {
+    name: "Pony Toby",
+    rating: 86,
+    role: "Eagle Hunter",
+    team: "Team Whatever",
+    img: "images/tobias.jpg",
+    move: "Shotgun",
+    strength: "Hyggestop",
+    weakness: "Sauna Mania",
+  },
+
+  {
+    name: "Praktikanten",
+    rating: 88,
+    role: "Referee",
+    team: "Dommerholdet",
+    img: "images/victor.jpg",
+    move: "Yellow Card",
+    strength: "Gæt en Øl",
+    weakness: "Bunde en øl",
+  },
+
+  {
+    name: "Victatoren",
+    rating: 83,
+    role: "Wildcard",
+    team: "Team Bagtroppen",
+    img: "images/kramp.jpg",
+    move: "Chaos Card",
+    strength: "Tid mod timing",
+    weakness: "Blind Beer",
+  },
 ];
 
 const playerGrid = document.querySelector("#playerGrid");
