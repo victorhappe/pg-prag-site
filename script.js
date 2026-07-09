@@ -524,3 +524,35 @@ function launchCelebration() {
     confettiContainer.appendChild(piece);
   }
 }
+
+const dinnerUnlockDate = new Date("2026-07-10T19:30:00+02:00").getTime();
+
+function updateDinnerCountdown() {
+  const now = Date.now();
+  const distance = dinnerUnlockDate - now;
+
+  const locked = document.querySelector("#dinnerLocked");
+  const unlocked = document.querySelector("#dinnerUnlocked");
+
+  if (!locked || !unlocked) return;
+
+  if (distance <= 0) {
+    locked.classList.add("hidden");
+    unlocked.classList.remove("hidden");
+    return;
+  }
+
+  document.querySelector("#dinnerDays").textContent = Math.floor(distance / (1000 * 60 * 60 * 24));
+  document.querySelector("#dinnerHours").textContent = Math.floor((distance / (1000 * 60 * 60)) % 24)
+    .toString()
+    .padStart(2, "0");
+  document.querySelector("#dinnerMinutes").textContent = Math.floor((distance / (1000 * 60)) % 60)
+    .toString()
+    .padStart(2, "0");
+  document.querySelector("#dinnerSeconds").textContent = Math.floor((distance / 1000) % 60)
+    .toString()
+    .padStart(2, "0");
+}
+
+updateDinnerCountdown();
+setInterval(updateDinnerCountdown, 1000);

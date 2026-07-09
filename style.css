@@ -800,3 +800,29 @@ footer {
     transform: rotate(8deg);
   }
 }
+
+.mini-countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.mini-countdown div {
+  background: #120f0d;
+  border: 1px solid rgba(245, 193, 93, 0.35);
+  border-radius: 14px;
+  padding: 12px 8px;
+  text-align: center;
+}
+
+.mini-countdown strong {
+  display: block;
+  color: #f5c15d;
+  font-size: 1.4rem;
+}
+
+.mini-countdown small {
+  font-size: 0.7rem;
+  color: #f7efe4;
+}
