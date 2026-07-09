@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PG Holdgenerator</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <main class="section wheel-page">
+        <p class="eyebrow">PG Prag 2026</p>
+        <h1>Spin The Wheel</h1>
+        <p>9 spillere. 3 hold</p>
+
+        <div class="wheel-layout">
+            <div class="wheel-box">
+                <div class="pointer">▼</div>
+                <canvas id="wheel" width="420" height="420"></canvas>
+                <button class="btn" id="spinBtn">Spin</button>
+                <h2 id="winnerText">Klar til lodtrækning</h2>
+            </div>
+
+            <div class="teams-box">
+                <article>
+                    <h3>🏆 Team 1</h3>
+                    <ul id="team1"></ul>
+                </article>
+
+                <article>
+                    <h3>🍺 Team 2</h3>
+                    <ul id="team2"></ul>
+                </article>
+
+                <article>
+                    <h3>🎯 Team 3</h3>
+                    <ul id="team3"></ul>
+                </article>
+            </div>
+        </div>
+
+
+    </main>
+
+    <script>
+        const players = [
+            "Dirty Hashlund",
+            "Dobbelt Felix",
+            "Joey",
+            "14",
+            "Kåre Nivå fra Duvå",
+            "Victatoren"
+        ];
+
+        const teamNames = ["team1", "team2", "team3"];
+        const teams = {
+            team1: ["Alfred Spikes"],
+            team2: ["Lithium"],
+            team3: ["Pony Toby"]
+        };
+
+
+        const canvas = document.querySelector("#wheel");
+        const ctx = canvas.getContext("2d");
+        const spinBtn = document.querySelector("#spinBtn");
+        const winnerText = document.querySelector("#winnerText");
+
+        let currentRotation = 0;
+        let currentTeamIndex = 0;
+
+        function drawWheel() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const center = canvas.width / 2;
+            const radius = 200;
+            const slice = (Math.PI * 2) / players.length;
+
+            players.forEach((player, index) => {
+                const angle = index * slice;
+
+                ctx.beginPath();
+                ctx.moveTo(center, center);
+                ctx.arc(center, center, radius, angle, angle + slice);
+                ctx.closePath();
+
+                ctx.fillStyle = index % 2 === 0 ? "#f5c15d" : "#211a17";
+                ctx.fill();
+                ctx.strokeStyle = "#120f0d";
+                ctx.lineWidth = 3;
+                ctx.stroke();
+
+                ctx.save();
+                ctx.translate(center, center);
+                ctx.rotate(angle + slice / 2);
+                ctx.textAlign = "right";
+                ctx.fillStyle = index % 2 === 0 ? "#120f0d" : "#f5c15d";
+                ctx.font = "bold 14px Arial";
+                ctx.fillText(player, radius - 14, 5);
+                ctx.restore();
+            });
+        }
+
+        function updateTeams() {
+            teamNames.forEach((team) => {
+                document.querySelector("#" + team).innerHTML = teams[team]
+                    .map((player) => `<li>${player}</li>`)
+                    .join("");
+            });
+        }
+
+        function spinWheel() {
+            if (players.length === 0) {
+                winnerText.textContent = "Alle hold er lavet 🍻";
+                spinBtn.disabled = true;
+                return;
+            }
+
+            spinBtn.disabled = true;
+
+            const selectedIndex = Math.floor(Math.random() * players.length);
+            const sliceDeg = 360 / players.length;
+            const targetDeg = 360 - selectedIndex * sliceDeg - sliceDeg / 2;
+            const extraSpins = 360 * 6;
+
+            currentRotation += extraSpins + targetDeg;
+
+            canvas.style.transition = "transform 4s cubic-bezier(.12,.67,.18,1)";
+            canvas.style.transform = `rotate(${currentRotation}deg)`;
+
+            setTimeout(() => {
+                const winner = players.splice(selectedIndex, 1)[0];
+                const teamKey = teamNames[currentTeamIndex];
+
+                teams[teamKey].push(winner);
+                currentTeamIndex = (currentTeamIndex + 1) % 3;
+
+                winnerText.textContent = `${winner} er valgt!`;
+                updateTeams();
+                drawWheel();
+
+                spinBtn.disabled = false;
+            }, 4100);
+        }
+
+        drawWheel();
+        updateTeams();
+
+        spinBtn.addEventListener("click", spinWheel);
+    </script>
+</body>
+
+</html>

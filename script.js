@@ -295,7 +295,7 @@ const players = [
     name: "Alfred Spikes",
     rating: 87,
     role: "Captain",
-    team: "Team Kammerklunker",
+    team: "Team 1",
     img: "images/alfred.jpg",
     move: "Split the G",
     strength: "Shotgun",
@@ -304,9 +304,9 @@ const players = [
 
   {
     name: "Dirty Hashlund",
-    rating: 84,
+    rating: 87,
     role: "Putter",
-    team: "Team Kammerklunker",
+    team: "Team ?",
     img: "images/anton.jpg",
     move: "Being Dirty",
     strength: "Bar Games",
@@ -317,7 +317,7 @@ const players = [
     name: "Lithium",
     rating: 89,
     role: "Captain",
-    team: "Team Whatever",
+    team: "Team 2",
     img: "images/august.jpg",
     move: "Split the G",
     strength: "Hyggestop",
@@ -326,9 +326,9 @@ const players = [
 
   {
     name: "Dobbelt Felix",
-    rating: 82,
+    rating: 86,
     role: "Birdie Hunter",
-    team: "Team Bagtroppen",
+    team: "Team ?",
     img: "images/felix.jpg",
     move: "Pub Race",
     strength: "Bund en øl",
@@ -337,9 +337,9 @@ const players = [
 
   {
     name: "Joey",
-    rating: 80,
+    rating: 84,
     role: "Rookie",
-    team: "Team Whatever",
+    team: "Team ?",
     img: "images/joseph.jpg",
     move: "Lucky Bounce",
     strength: "Lokal Charme",
@@ -350,7 +350,7 @@ const players = [
     name: "14",
     rating: 85,
     role: "Long Driver",
-    team: "Team Bagtroppen",
+    team: "Team ?",
     img: "images/kjartan.jpg",
     move: "Beer Sprint",
     strength: "Tempo",
@@ -359,9 +359,9 @@ const players = [
 
   {
     name: "Kåre Nivå fra Duvå",
-    rating: 81,
+    rating: 84,
     role: "Iron Player",
-    team: "Team Kammerklunker",
+    team: "Team ?",
     img: "images/kaare.jpg",
     move: "Water Hazard",
     strength: "Stabil Bund",
@@ -370,7 +370,7 @@ const players = [
 
   {
     name: "Hyggestoppet",
-    rating: 83,
+    rating: 81,
     role: "Referee",
     team: "Dommerholdet",
     img: "images/mads.jpg",
@@ -381,9 +381,9 @@ const players = [
 
   {
     name: "Pony Toby",
-    rating: 86,
+    rating: 89,
     role: "Eagle Hunter",
-    team: "Team Whatever",
+    team: "Team 3",
     img: "images/tobias.jpg",
     move: "Shotgun",
     strength: "Hyggestop",
@@ -392,20 +392,20 @@ const players = [
 
   {
     name: "Praktikanten",
-    rating: 88,
+    rating: 81,
     role: "Referee",
     team: "Dommerholdet",
     img: "images/victor.jpg",
     move: "Yellow Card",
-    strength: "Gæt en Øl",
-    weakness: "Bunde en øl",
+    strength: "Tequila Shots",
+    weakness: "Bund en øl",
   },
 
   {
     name: "Victatoren",
     rating: 83,
     role: "Wildcard",
-    team: "Team Bagtroppen",
+    team: "Team ?",
     img: "images/kramp.jpg",
     move: "Chaos Card",
     strength: "Tid mod timing",
@@ -556,3 +556,10 @@ function updateDinnerCountdown() {
 
 updateDinnerCountdown();
 setInterval(updateDinnerCountdown, 1000);
+
+const saveTeamsBtn = document.querySelector("#saveTeamsBtn");
+
+saveTeamsBtn.addEventListener("click", () => {
+  localStorage.setItem("pgTeams", JSON.stringify(teams));
+  alert("Holdene er gemt! Gå tilbage til forsiden og refresh siden.");
+});
