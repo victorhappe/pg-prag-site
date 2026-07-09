@@ -26,6 +26,8 @@ function updateCountdown() {
       overlay.classList.remove("hidden");
       localStorage.setItem("pgStartShown", "true");
 
+      launchCelebration();
+
       setTimeout(() => {
         overlay.classList.add("hidden");
       }, 5000);
@@ -491,4 +493,34 @@ function loadPgRouteMap() {
   }).addTo(map);
 
   map.fitBounds(stops);
+}
+
+function launchCelebration() {
+  const beerContainer = document.querySelector("#beerRain");
+  const confettiContainer = document.querySelector("#confetti");
+
+  beerContainer.innerHTML = "";
+  confettiContainer.innerHTML = "";
+
+  for (let i = 0; i < 40; i++) {
+    const beer = document.createElement("div");
+    beer.className = "beer";
+    beer.innerHTML = "🍺";
+    beer.style.left = Math.random() * 100 + "vw";
+    beer.style.animationDuration = 3 + Math.random() * 2 + "s";
+    beer.style.animationDelay = Math.random() + "s";
+    beerContainer.appendChild(beer);
+  }
+
+  const colors = ["#f5c15d", "#ffffff", "#2ecc71", "#3498db", "#e74c3c"];
+
+  for (let i = 0; i < 140; i++) {
+    const piece = document.createElement("div");
+    piece.className = "confetti";
+    piece.style.left = Math.random() * 100 + "vw";
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.animationDuration = 2 + Math.random() * 3 + "s";
+    piece.style.animationDelay = Math.random() + "s";
+    confettiContainer.appendChild(piece);
+  }
 }
