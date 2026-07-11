@@ -716,3 +716,137 @@ function updateDinnerCountdown() {
 updateDinnerCountdown();
 
 dinnerCountdownInterval = setInterval(updateDinnerCountdown, 1000);
+
+const quizQuestions = [
+  {
+    question: "Hvilken flod løber gennem Prag?",
+    options: ["A) Donau", "B) Elben", "C) Vltava (Moldau)", "D) Oder"],
+    answer: "C) Vltava (Moldau)",
+    fact: "Vltava er Tjekkiets længste flod og løber gennem hjertet af Prag.",
+  },
+
+  {
+    question: "Prag Slot er kendt for at være...",
+    options: ["A) Europas højeste slot", "B) Verdens største gamle slotskompleks", "C) Verdens ældste slot", "D) Europas største museum"],
+    answer: "B) Verdens største gamle slotskompleks",
+    fact: "Prague Castle står i Guinness World Records.",
+  },
+
+  {
+    question: "Hvad hedder Prags berømte astronomiske ur?",
+    options: ["A) Big Ben", "B) Orloj", "C) Astrolux", "D) Chronos"],
+    answer: "B) Orloj",
+    fact: "Uret blev installeret i 1410 og er et af verdens ældste fungerende astronomiske ure.",
+  },
+
+  {
+    question: "Hvilken tjekkisk øl blev verdens første pilsner?",
+    options: ["A) Budvar", "B) Kozel", "C) Staropramen", "D) Pilsner Urquell"],
+    answer: "D) Pilsner Urquell",
+    fact: "Den første pilsner blev brygget i Plzeň i 1842.",
+  },
+
+  {
+    question: "Tjekkiet topper ofte verdensstatistikken i...",
+    options: ["A) Kaffeforbrug", "B) Vinforbrug", "C) Ølforbrug pr. indbygger", "D) Vodkaforbrug"],
+    answer: "C) Ølforbrug pr. indbygger",
+    fact: "En gennemsnitlig tjekke drikker omkring 150 liter øl om året.",
+  },
+
+  {
+    question: "Hvor mange statuer står der langs Karlsbroen?",
+    options: ["A) 20", "B) 25", "C) 30", "D) 36"],
+    answer: "C) 30",
+    fact: "De fleste er kopier – originalerne står på museum.",
+  },
+
+  {
+    question: "Hvad hedder valutaen i Tjekkiet?",
+    options: ["A) Euro", "B) Zloty", "C) Koruna", "D) Forint"],
+    answer: "C) Koruna",
+    fact: "Tjekkiet har stadig ikke indført euro.",
+  },
+
+  {
+    question: "Hvilken af disse personer blev født i Prag?",
+    options: ["A) Franz Kafka", "B) Albert Einstein", "C) Mozart", "D) Beethoven"],
+    answer: "A) Franz Kafka",
+    fact: "Kafka blev født i Prag i 1883.",
+  },
+
+  {
+    question: "Hvilken farve har sporvognene, som er et symbol på Prag?",
+    options: ["A) Grøn", "B) Rød", "C) Blå", "D) Gul"],
+    answer: "B) Rød",
+    fact: "De røde sporvogne er et af Prags mest ikoniske kendetegn.",
+  },
+
+  {
+    question: "Hvornår blev Karlsbroen påbegyndt?",
+    options: ["A) 1212", "B) 1357", "C) 1492", "D) 1601"],
+    answer: "B) 1357",
+    fact: "Grundstenen blev ifølge legenden lagt 9. juli 1357 kl. 05:31.",
+  },
+];
+
+const quizList = document.querySelector("#quizList");
+const quizJudgeBtn = document.querySelector("#quizJudgeBtn");
+const hideAnswersBtn = document.querySelector("#hideAnswersBtn");
+
+function renderQuiz() {
+  if (!quizList) return;
+
+  quizList.innerHTML = quizQuestions
+    .map(
+      (item, index) => `
+        <article class="quiz-card">
+          <div class="quiz-number">${index + 1}</div>
+
+          <div class="quiz-content">
+            <h3>${item.question}</h3>
+
+            <div class="quiz-options">
+              ${item.options.map((option) => `<p>${option}</p>`).join("")}
+            </div>
+
+            <div class="quiz-answer hidden">
+              <strong>Rigtigt svar:</strong>
+              <p>${item.answer}</p>
+              <small>${item.fact}</small>
+            </div>
+          </div>
+        </article>
+      `,
+    )
+    .join("");
+}
+
+renderQuiz();
+
+if (quizJudgeBtn) {
+  quizJudgeBtn.addEventListener("click", () => {
+    const code = prompt("Indtast dommerkode:");
+
+    if (code === "dirtyhaslund") {
+      document.querySelectorAll(".quiz-answer").forEach((answer) => {
+        answer.classList.remove("hidden");
+      });
+
+      quizJudgeBtn.classList.add("hidden");
+      hideAnswersBtn?.classList.remove("hidden");
+    } else if (code !== null) {
+      alert("Forkert kode. Facit forbliver skjult.");
+    }
+  });
+}
+
+if (hideAnswersBtn) {
+  hideAnswersBtn.addEventListener("click", () => {
+    document.querySelectorAll(".quiz-answer").forEach((answer) => {
+      answer.classList.add("hidden");
+    });
+
+    hideAnswersBtn.classList.add("hidden");
+    quizJudgeBtn?.classList.remove("hidden");
+  });
+}
