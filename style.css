@@ -881,3 +881,151 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+.treasure-results {
+  background: radial-gradient(circle at top, rgba(245, 193, 93, 0.16), transparent 38%), #120f0d;
+  text-align: center;
+}
+
+.results-intro {
+  margin-top: -15px;
+  margin-bottom: 40px;
+  color: #b8aaa0;
+  font-size: 1.1rem;
+}
+
+.podium-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  align-items: end;
+}
+
+.result-card {
+  position: relative;
+  background: #211a17;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 28px;
+  padding: 30px 24px;
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.35);
+}
+
+.result-card h3 {
+  margin: 14px 0 8px;
+  color: #f5c15d;
+  font-size: 1.5rem;
+}
+
+.placement {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(245, 193, 93, 0.12);
+  color: #f5c15d;
+  font-weight: 900;
+}
+
+.captain-name {
+  color: #b8aaa0;
+}
+
+.result-score {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 5px;
+  margin: 24px 0 6px;
+  color: #f5c15d;
+}
+
+.result-score strong {
+  font-size: 4rem;
+  line-height: 1;
+}
+
+.result-score span {
+  font-size: 1.3rem;
+  font-weight: 900;
+}
+
+.result-progress {
+  height: 14px;
+  margin-top: 20px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #0c0a09;
+  border: 1px solid rgba(245, 193, 93, 0.2);
+}
+
+.result-progress div {
+  height: 100%;
+  border-radius: inherit;
+  background: #f5c15d;
+}
+
+.result-percent {
+  color: #b8aaa0;
+  font-size: 0.9rem;
+}
+
+.winner-card {
+  min-height: 430px;
+  border: 2px solid #f5c15d;
+  transform: translateY(-20px);
+  box-shadow:
+    0 0 35px rgba(245, 193, 93, 0.2),
+    0 28px 70px rgba(0, 0, 0, 0.5);
+}
+
+.second-card {
+  min-height: 390px;
+}
+
+.third-card {
+  min-height: 360px;
+}
+
+.winner-banner {
+  max-width: 800px;
+  margin: 60px auto 0;
+  padding: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  border: 1px solid rgba(245, 193, 93, 0.4);
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(245, 193, 93, 0.16), transparent), #211a17;
+}
+
+.winner-banner > span {
+  font-size: 4rem;
+}
+
+.winner-banner h3 {
+  margin: 5px 0;
+  color: #f5c15d;
+  font-size: 2rem;
+}
+
+.winner-banner p {
+  margin: 5px 0;
+}
+
+@media (max-width: 850px) {
+  .podium-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .winner-card,
+  .second-card,
+  .third-card {
+    min-height: auto;
+    transform: none;
+  }
+
+  .winner-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+}

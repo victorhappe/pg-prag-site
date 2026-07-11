@@ -1,11 +1,30 @@
+/* =========================
+   MOBILMENU
+========================= */
+
 const menuBtn = document.querySelector(".menu-btn");
 const nav = document.querySelector(".nav");
 
-menuBtn.addEventListener("click", () => {
-  nav.classList.toggle("active");
-});
+if (menuBtn && nav) {
+  menuBtn.addEventListener("click", () => {
+    nav.classList.toggle("active");
+  });
+
+  nav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("active");
+    });
+  });
+}
+
+/* =========================
+   PG COUNTDOWN
+========================= */
 
 const targetDate = new Date("2026-07-11T12:00:00+02:00").getTime();
+
+const countdown = document.querySelector(".countdown");
+
 const countdownEls = {
   days: document.querySelector("#days"),
   hours: document.querySelector("#hours"),
@@ -13,12 +32,16 @@ const countdownEls = {
   seconds: document.querySelector("#seconds"),
 };
 
+let countdownInterval;
+
 function updateCountdown() {
-  const now = new Date().getTime();
+  if (!countdown) return;
+
+  const now = Date.now();
   const distance = targetDate - now;
 
   if (distance <= 0) {
-    document.querySelector(".countdown").innerHTML = "<h3>PG ER I GANG 🍻</h3>";
+    countdown.innerHTML = "<h3>🍻 PG ER I GANG 🍻</h3>";
 
     const overlay = document.querySelector("#pgStartOverlay");
 
@@ -33,23 +56,71 @@ function updateCountdown() {
       }, 5000);
     }
 
+    clearInterval(countdownInterval);
     return;
   }
 
-  countdownEls.days.textContent = Math.floor(distance / (1000 * 60 * 60 * 24));
-  countdownEls.hours.textContent = Math.floor((distance / (1000 * 60 * 60)) % 24)
-    .toString()
-    .padStart(2, "0");
-  countdownEls.minutes.textContent = Math.floor((distance / (1000 * 60)) % 60)
-    .toString()
-    .padStart(2, "0");
-  countdownEls.seconds.textContent = Math.floor((distance / 1000) % 60)
-    .toString()
-    .padStart(2, "0");
+  if (!countdownEls.days || !countdownEls.hours || !countdownEls.minutes || !countdownEls.seconds) {
+    return;
+  }
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((distance / (1000 * 60)) % 60);
+  const seconds = Math.floor((distance / 1000) % 60);
+
+  countdownEls.days.textContent = String(days).padStart(2, "0");
+  countdownEls.hours.textContent = String(hours).padStart(2, "0");
+  countdownEls.minutes.textContent = String(minutes).padStart(2, "0");
+  countdownEls.seconds.textContent = String(seconds).padStart(2, "0");
 }
 
 updateCountdown();
-setInterval(updateCountdown, 1000);
+countdownInterval = setInterval(updateCountdown, 1000);
+
+/* =========================
+   STARTANIMATION
+========================= */
+
+function launchCelebration() {
+  const beerContainer = document.querySelector("#beerRain");
+  const confettiContainer = document.querySelector("#confetti");
+
+  if (!beerContainer || !confettiContainer) return;
+
+  beerContainer.innerHTML = "";
+  confettiContainer.innerHTML = "";
+
+  for (let i = 0; i < 40; i++) {
+    const beer = document.createElement("div");
+
+    beer.className = "beer";
+    beer.textContent = "🍺";
+    beer.style.left = `${Math.random() * 100}vw`;
+    beer.style.animationDuration = `${3 + Math.random() * 2}s`;
+    beer.style.animationDelay = `${Math.random()}s`;
+
+    beerContainer.appendChild(beer);
+  }
+
+  const colors = ["#f5c15d", "#ffffff", "#2ecc71", "#3498db", "#e74c3c"];
+
+  for (let i = 0; i < 140; i++) {
+    const piece = document.createElement("div");
+
+    piece.className = "confetti";
+    piece.style.left = `${Math.random() * 100}vw`;
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.animationDuration = `${2 + Math.random() * 3}s`;
+    piece.style.animationDelay = `${Math.random()}s`;
+
+    confettiContainer.appendChild(piece);
+  }
+}
+
+/* =========================
+   HEMMELIG PG-RUTE
+========================= */
 
 const routeStops = [
   {
@@ -123,336 +194,69 @@ const judgeLocked = document.querySelector("#judgeLocked");
 const routeList = document.querySelector("#routeList");
 const mapsLink = document.querySelector("#mapsLink");
 
-judgeBtn.addEventListener("click", () => {
-  const code = prompt("Indtast dommerkode:");
+if (judgeBtn) {
+  judgeBtn.addEventListener("click", () => {
+    const code = prompt("Indtast dommerkode:");
 
-  if (code === "dirtyhaslund") {
-    judgeLocked.classList.add("hidden");
-    judgePanel.classList.remove("hidden");
-    renderRoute();
-    loadPgRouteMap();
-  }
-});
+    if (code === "dirtyhaslund") {
+      judgeLocked?.classList.add("hidden");
+      judgePanel?.classList.remove("hidden");
+
+      renderRoute();
+      loadPgRouteMap();
+    } else if (code !== null) {
+      alert("Forkert kode. Ruten forbliver hemmelig.");
+    }
+  });
+}
 
 function renderRoute() {
+  if (!routeList) return;
+
   routeList.innerHTML = "";
 
   routeStops.forEach((stop) => {
-    routeList.innerHTML += `
-      <article class="route-stop-card">
-        <div class="route-number">${stop.number}</div>
+    routeList.insertAdjacentHTML(
+      "beforeend",
+      `
+        <article class="route-stop-card">
+          <div class="route-number">${stop.number}</div>
 
-        <div>
-          <h4>${stop.name}</h4>
-          <p>${stop.game}</p>
-          <small>${stop.address}</small>
-        </div>
-
-        <span class="route-time">${stop.time}</span>
-      </article>
-    `;
-  });
-
-  const addresses = routeStops.map((stop) => encodeURIComponent(stop.address)).join("/");
-  mapsLink.href = `https://www.google.com/maps/dir/${addresses}`;
-}
-
-const games = ["Tid mod timing", "Split the G", "Ikke bestil samme øl som en anden", "Gæt ABV", "Øl i strakt arm", "Fodres øl", "Øl stafet", "Hyggestop", "Pub Race", "Hink en Nisse", "Meyer / Hestevædeløb", "Bund en øl", "Vodka Vand", "Øl må ikke røre bord", "Bund med sugerør", "Bedste skumskæg"];
-
-const huntItems = [
-  "Drik en mlíko",
-  "Tag en tur med letbanen",
-  "Find 67 et sted i Prag",
-  "Tag en selfie med en statue",
-  "Find en gade med brosten og læg på den",
-  "Tag et billede på Karlsbroen",
-  "Bestil en øl på tjekkisk",
-  "Køb en snack for under 30 CZK",
-  "Få en fremmed til at tage et gruppebillede",
-  "Find 69 et sted i Prag",
-  "Find en bygning med gyldne detaljer",
-  'Få en lokal til at sige "Skål!" på video',
-  "Tag et billede med en gademusikant",
-  "Find en kirke",
-  "Få en highfive af en fremmed gammel mand",
-  "Lav armbøjninger på Old Town Square",
-  "Gå ind på en bar og spørg en gæst: “are you also running away from France?”",
-  "Tag en selfie med et dansk flag",
-  "Drik en mørk øl",
-  "Find en pub med over 10 fadøl",
-  "Få en fremmed til at lære dig et tjekkisk ord",
-  "Lav en menneskepyramide",
-  "Bund en liter vand",
-  "Find en vinbar og bestil et glas",
-  "Find et hus med en blå dør",
-  "Tag en selfie med en cykel",
-  "Find en pub med træbænke",
-  "Tag et billede af et ur kl. 18.18",
-  "Lav en rekreation af Olsen Banden, hvor I går i række efter hinanden ved en havn",
-  "Hæld en øl i hovedet på en holdkammerat, der ligger ned",
-  "Find et sted med levende musik",
-  "Find et springvand",
-  "Smag en hvedeøl",
-  "Syng PG-sangen ved kanalen",
-  "Find en bil med dansk nummerplade",
-  "Drik skør sodavand",
-  "Færdiggør en sixpack fra et supermarked",
-  "Smag en lokal snaps, I ikke kender",
-  "Find en bænk med udsigt",
-  "Find en gade uden biler",
-  "Smag en lokal pølse / glizzy",
-  "Find et skakbræt i det fri",
-  "Få bartenderen til at skrive holdnavnet på en serviet",
-  "Færdiggør en flaske vin — supermarkedsvin er fint",
-  "Tag et billede af en due",
-  "Find et skilt med et tal over 100",
-  "ALLE fra holdet bunder en flaske vand",
-  "Bund en øl hurtigere end en fremmed lokal",
-  "Find et apotek",
-  "Drik en IPA",
-  "Find en boghandel med MEIN KAMPF",
-  "Find et træ, der er højere end bygningen ved siden af",
-  "Find et rundt vindue",
-  "Tag et billede af en båd",
-  "Tag et spil kævle i en lokal park",
-  "Find et sted, hvor man kan få ØLspa",
-  "Tag en stor bid af en citron",
-  "Tag et kreativt selfie med en skraldespand",
-  "Find en klokke, der hænger udendørs",
-  "Spot en veteranbil",
-];
-
-const gameGrid = document.querySelector("#gameGrid");
-games.forEach((game) => {
-  const div = document.createElement("div");
-  div.className = "game-item";
-  div.textContent = game;
-  gameGrid.appendChild(div);
-});
-
-const huntList = document.querySelector("#huntList");
-huntItems.forEach((item, index) => {
-  const label = document.createElement("label");
-  label.className = "hunt-item";
-  label.innerHTML = `<input type="checkbox" data-id="hunt-${index}"> <span>${item}</span>`;
-  huntList.appendChild(label);
-});
-
-document.querySelectorAll(".hunt-item input").forEach((input) => {
-  const saved = localStorage.getItem(input.dataset.id);
-  input.checked = saved === "true";
-  input.addEventListener("change", () => {
-    localStorage.setItem(input.dataset.id, input.checked);
-  });
-});
-
-const teamPoints = {
-  team1: Number(localStorage.getItem("team1")) || 0,
-  team2: Number(localStorage.getItem("team2")) || 0,
-  team3: Number(localStorage.getItem("team3")) || 0,
-};
-
-function updateLeaderboard() {
-  document.querySelector("#team1Points").textContent = teamPoints.team1;
-  document.querySelector("#team2Points").textContent = teamPoints.team2;
-  document.querySelector("#team3Points").textContent = teamPoints.team3;
-}
-
-function changePoints(team, amount) {
-  teamPoints[team] += amount;
-  localStorage.setItem(team, teamPoints[team]);
-  updateLeaderboard();
-}
-
-updateLeaderboard();
-
-const randomGameBtn = document.querySelector("#randomGameBtn");
-const randomGameResult = document.querySelector("#randomGameResult");
-
-randomGameBtn.addEventListener("click", () => {
-  const randomIndex = Math.floor(Math.random() * games.length);
-  randomGameResult.textContent = `🎲 ${games[randomIndex]}`;
-});
-
-function updateHuntProgress() {
-  const checkboxes = document.querySelectorAll(".hunt-item input");
-  const checked = document.querySelectorAll(".hunt-item input:checked").length;
-  const total = checkboxes.length;
-  const percentage = (checked / total) * 100;
-
-  document.querySelector("#huntProgress").style.width = `${percentage}%`;
-  document.querySelector("#huntProgressText").textContent = `${checked} / ${total} challenges klaret`;
-}
-
-document.querySelectorAll(".hunt-item input").forEach((input) => {
-  input.addEventListener("change", updateHuntProgress);
-});
-
-updateHuntProgress();
-
-const players = [
-  {
-    name: "Alfred Spikes",
-    rating: 87,
-    role: "Captain",
-    team: "Team 1",
-    img: "images/alfred.jpg",
-    move: "Split the G",
-    strength: "Shotgun",
-    weakness: "Vodka Vand",
-  },
-
-  {
-    name: "Dirty Hashlund",
-    rating: 87,
-    role: "Putter",
-    team: "Team ?",
-    img: "images/anton.jpg",
-    move: "Being Dirty",
-    strength: "Bar Games",
-    weakness: "Stout",
-  },
-
-  {
-    name: "Lithium",
-    rating: 89,
-    role: "Captain",
-    team: "Team 2",
-    img: "images/august.jpg",
-    move: "Split the G",
-    strength: "Hyggestop",
-    weakness: "Mlíko",
-  },
-
-  {
-    name: "Dobbelt Felix",
-    rating: 86,
-    role: "Birdie Hunter",
-    team: "Team ?",
-    img: "images/felix.jpg",
-    move: "Pub Race",
-    strength: "Bund en øl",
-    weakness: "Ølquiz",
-  },
-
-  {
-    name: "Joey",
-    rating: 84,
-    role: "Rookie",
-    team: "Team ?",
-    img: "images/joseph.jpg",
-    move: "Lucky Bounce",
-    strength: "Lokal Charme",
-    weakness: "Vodka Vand",
-  },
-
-  {
-    name: "14",
-    rating: 85,
-    role: "Long Driver",
-    team: "Team ?",
-    img: "images/kjartan.jpg",
-    move: "Beer Sprint",
-    strength: "Tempo",
-    weakness: "Styr på Procenten",
-  },
-
-  {
-    name: "Kåre Nivå fra Duvå",
-    rating: 84,
-    role: "Iron Player",
-    team: "Team ?",
-    img: "images/kaare.jpg",
-    move: "Water Hazard",
-    strength: "Stabil Bund",
-    weakness: "IPA",
-  },
-
-  {
-    name: "Hyggestoppet",
-    rating: 81,
-    role: "Referee",
-    team: "Dommerholdet",
-    img: "images/mads.jpg",
-    move: "Rulebook",
-    strength: "Saunamania",
-    weakness: "Vodka Vand",
-  },
-
-  {
-    name: "Pony Toby",
-    rating: 89,
-    role: "Eagle Hunter",
-    team: "Team 3",
-    img: "images/tobias.jpg",
-    move: "Shotgun",
-    strength: "Hyggestop",
-    weakness: "Sauna Mania",
-  },
-
-  {
-    name: "Praktikanten",
-    rating: 81,
-    role: "Referee",
-    team: "Dommerholdet",
-    img: "images/victor.jpg",
-    move: "Yellow Card",
-    strength: "Tequila Shots",
-    weakness: "Bund en øl",
-  },
-
-  {
-    name: "Victatoren",
-    rating: 83,
-    role: "Wildcard",
-    team: "Team ?",
-    img: "images/kramp.jpg",
-    move: "Chaos Card",
-    strength: "Tid mod timing",
-    weakness: "Blind Beer",
-  },
-];
-
-const playerGrid = document.querySelector("#playerGrid");
-
-players.forEach((player) => {
-  playerGrid.innerHTML += `
-    <article class="player-card">
-      <div class="player-card-inner">
-        <div class="player-front">
-          <div class="player-top">
-            <div>
-              <span class="player-rating">${player.rating}</span>
-              <span class="player-role">${player.role}</span>
-            </div>
-            <span class="flag">🇩🇰</span>
+          <div>
+            <h4>${stop.name}</h4>
+            <p>${stop.game}</p>
+            <small>${stop.address}</small>
           </div>
 
-          <img src="${player.img}" alt="${player.name}" class="player-img">
+          <span class="route-time">${stop.time}</span>
+        </article>
+      `,
+    );
+  });
 
-          <div class="player-name">${player.name}</div>
+  if (mapsLink) {
+    const addresses = routeStops.map((stop) => encodeURIComponent(stop.address)).join("/");
 
-          <div class="player-badge">
-            <i class="fa-solid fa-beer-mug-empty"></i>
-          </div>
-        </div>
+    mapsLink.href = `https://www.google.com/maps/dir/${addresses}`;
+  }
+}
 
-        <div class="player-back">
-          <h3>${player.name}</h3>
-          <p><strong>Hold</strong><br>${player.team}</p>
-          <p><strong>Special move</strong><br>${player.move}</p>
-          <p><strong>Styrke</strong><br>${player.strength}</p>
-          <p><strong>Svaghed</strong><br>${player.weakness}</p>
-        </div>
-      </div>
-    </article>
-  `;
-});
+/* =========================
+   LEAFLET-KORT
+========================= */
 
 let pgMapInitialized = false;
 
 function loadPgRouteMap() {
   if (pgMapInitialized) return;
+
+  const mapElement = document.querySelector("#pgMap");
+
+  if (!mapElement || typeof L === "undefined") {
+    console.error("Leaflet eller #pgMap kunne ikke findes.");
+    return;
+  }
+
   pgMapInitialized = true;
 
   const map = L.map("pgMap").setView([50.0755, 14.4378], 13);
@@ -463,15 +267,15 @@ function loadPgRouteMap() {
   }).addTo(map);
 
   const stops = [
-    [50.062802, 14.409415], // 1 Airbnb
-    [50.07968257024647, 14.42595589698607], // 2 Rocky
-    [50.0840296734399, 14.421169996986292], // 3 Oktoberfest
-    [50.08151624966299, 14.425433754657204], // 4 Valhalla
-    [50.08626944937062, 14.418742239315312], // 5 Fat Cat
-    [50.08016105374984, 14.42540869513737], // 6 Jáma
-    [50.086395632939066, 14.420287881644283], // 7 My People
-    [50.088192345804345, 14.423215510479924], // 8 Dubliner
-    [50.062802, 14.409415], // 9 Airbnb
+    [50.062802, 14.409415],
+    [50.07968257024647, 14.42595589698607],
+    [50.0840296734399, 14.421169996986292],
+    [50.08151624966299, 14.425433754657204],
+    [50.08626944937062, 14.418742239315312],
+    [50.08016105374984, 14.42540869513737],
+    [50.086395632939066, 14.420287881644283],
+    [50.088192345804345, 14.423215510479924],
+    [50.062802, 14.409415],
   ];
 
   routeStops.forEach((stop, index) => {
@@ -482,7 +286,15 @@ function loadPgRouteMap() {
       iconAnchor: [19, 19],
     });
 
-    L.marker(stops[index], { icon: numberIcon }).addTo(map).bindPopup(`<strong>${stop.number}. ${stop.name}</strong><br>${stop.game}<br>${stop.address}`);
+    L.marker(stops[index], {
+      icon: numberIcon,
+    }).addTo(map).bindPopup(`
+        <strong>${stop.number}. ${stop.name}</strong>
+        <br>
+        ${stop.game}
+        <br>
+        ${stop.address}
+      `);
   });
 
   L.polyline(stops, {
@@ -492,74 +304,415 @@ function loadPgRouteMap() {
     dashArray: "10, 10",
   }).addTo(map);
 
-  map.fitBounds(stops);
+  map.fitBounds(stops, {
+    padding: [30, 30],
+  });
+
+  setTimeout(() => {
+    map.invalidateSize();
+  }, 100);
 }
 
-function launchCelebration() {
-  const beerContainer = document.querySelector("#beerRain");
-  const confettiContainer = document.querySelector("#confetti");
+/* =========================
+   P GAMES
+========================= */
 
-  beerContainer.innerHTML = "";
-  confettiContainer.innerHTML = "";
+const games = ["Tid mod timing", "Split the G", "Ikke bestil samme øl som en anden", "Gæt ABV", "Øl i strakt arm", "Fodres øl", "Øl stafet", "Hyggestop", "Pub Race", "Hink en Nisse", "Meyer / Hestevædeløb", "Bund en øl", "Vodka Vand", "Øl må ikke røre bord", "Bund med sugerør", "Bedste skumskæg"];
 
-  for (let i = 0; i < 40; i++) {
-    const beer = document.createElement("div");
-    beer.className = "beer";
-    beer.innerHTML = "🍺";
-    beer.style.left = Math.random() * 100 + "vw";
-    beer.style.animationDuration = 3 + Math.random() * 2 + "s";
-    beer.style.animationDelay = Math.random() + "s";
-    beerContainer.appendChild(beer);
+const gameGrid = document.querySelector("#gameGrid");
+
+if (gameGrid) {
+  games.forEach((game) => {
+    const gameItem = document.createElement("div");
+
+    gameItem.className = "game-item";
+    gameItem.textContent = game;
+
+    gameGrid.appendChild(gameItem);
+  });
+}
+
+/* =========================
+   RANDOM CHALLENGE
+========================= */
+
+const randomGameBtn = document.querySelector("#randomGameBtn");
+
+const randomGameResult = document.querySelector("#randomGameResult");
+
+if (randomGameBtn && randomGameResult) {
+  randomGameBtn.addEventListener("click", () => {
+    const randomIndex = Math.floor(Math.random() * games.length);
+
+    randomGameResult.textContent = `🎲 ${games[randomIndex]}`;
+  });
+}
+
+/* =========================
+   LEADERBOARD
+========================= */
+
+const teamPoints = {
+  team1: Number(localStorage.getItem("team1")) || 0,
+  team2: Number(localStorage.getItem("team2")) || 0,
+  team3: Number(localStorage.getItem("team3")) || 0,
+};
+
+function updateLeaderboard() {
+  const team1Points = document.querySelector("#team1Points");
+
+  const team2Points = document.querySelector("#team2Points");
+
+  const team3Points = document.querySelector("#team3Points");
+
+  if (team1Points) {
+    team1Points.textContent = teamPoints.team1;
   }
 
-  const colors = ["#f5c15d", "#ffffff", "#2ecc71", "#3498db", "#e74c3c"];
+  if (team2Points) {
+    team2Points.textContent = teamPoints.team2;
+  }
 
-  for (let i = 0; i < 140; i++) {
-    const piece = document.createElement("div");
-    piece.className = "confetti";
-    piece.style.left = Math.random() * 100 + "vw";
-    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
-    piece.style.animationDuration = 2 + Math.random() * 3 + "s";
-    piece.style.animationDelay = Math.random() + "s";
-    confettiContainer.appendChild(piece);
+  if (team3Points) {
+    team3Points.textContent = teamPoints.team3;
   }
 }
+
+function changePoints(team, amount) {
+  if (!(team in teamPoints)) return;
+
+  teamPoints[team] += amount;
+
+  localStorage.setItem(team, String(teamPoints[team]));
+
+  updateLeaderboard();
+}
+
+updateLeaderboard();
+
+/* =========================
+   GEMTE HOLD
+========================= */
+
+function getSavedTeams() {
+  try {
+    return JSON.parse(localStorage.getItem("pgTeams"));
+  } catch (error) {
+    console.error("De gemte hold kunne ikke læses:", error);
+
+    return null;
+  }
+}
+
+const savedTeams = getSavedTeams();
+
+function findPlayerTeam(playerName, fallbackTeam) {
+  if (!savedTeams) return fallbackTeam;
+
+  const teamNameMap = {
+    team1: "Dirty TwoKnights",
+    team2: "The Drunken Archers",
+    team3: "The Lords of Beerkstein",
+  };
+
+  for (const [teamKey, members] of Object.entries(savedTeams)) {
+    if (Array.isArray(members) && members.includes(playerName)) {
+      return teamNameMap[teamKey] || teamKey;
+    }
+  }
+
+  return fallbackTeam;
+}
+
+function loadSavedTeamsIntoPage() {
+  if (!savedTeams) return;
+
+  const teamElements = {
+    team1: document.querySelector("#mainTeam1"),
+    team2: document.querySelector("#mainTeam2"),
+    team3: document.querySelector("#mainTeam3"),
+  };
+
+  Object.entries(teamElements).forEach(([teamKey, element]) => {
+    if (!element) return;
+
+    const members = savedTeams[teamKey];
+
+    if (!Array.isArray(members)) return;
+
+    element.innerHTML = members
+      .map((player, index) => {
+        const icon = index === 0 ? "👑" : "👤";
+
+        return `<li>${icon} ${player}</li>`;
+      })
+      .join("");
+  });
+}
+
+loadSavedTeamsIntoPage();
+
+/* =========================
+   SPILLERKORT
+========================= */
+
+const players = [
+  {
+    name: "Alfred Spikes",
+    rating: 87,
+    role: "Captain",
+    team: "Dirty TwoKnights",
+    img: "images/alfred.jpg",
+    move: "Split the G",
+    strength: "Shotgun",
+    weakness: "Vodka Vand",
+  },
+  {
+    name: "Dirty Hashlund",
+    rating: 87,
+    role: "Putter",
+    team: findPlayerTeam("Dirty Hashlund", "Team ukendt"),
+    img: "images/anton.jpg",
+    move: "Being Dirty",
+    strength: "Bar Games",
+    weakness: "Stout",
+  },
+  {
+    name: "Lithium",
+    rating: 89,
+    role: "Captain",
+    team: "The Drunken Archers",
+    img: "images/august.jpg",
+    move: "Split the G",
+    strength: "Hyggestop",
+    weakness: "Mlíko",
+  },
+  {
+    name: "Dobbelt Felix",
+    rating: 86,
+    role: "Birdie Hunter",
+    team: findPlayerTeam("Dobbelt Felix", "Team ukendt"),
+    img: "images/felix.jpg",
+    move: "Pub Race",
+    strength: "Bund en øl",
+    weakness: "Ølquiz",
+  },
+  {
+    name: "Joey",
+    rating: 84,
+    role: "Rookie",
+    team: findPlayerTeam("Joey", "Team ukendt"),
+    img: "images/joseph.jpg",
+    move: "Lucky Bounce",
+    strength: "Lokal Charme",
+    weakness: "Vodka Vand",
+  },
+  {
+    name: "14",
+    rating: 85,
+    role: "Long Driver",
+    team: findPlayerTeam("14", "Team ukendt"),
+    img: "images/kjartan.jpg",
+    move: "Beer Sprint",
+    strength: "Tempo",
+    weakness: "Styr på Procenten",
+  },
+  {
+    name: "Kåre Nivå fra Duvå",
+    rating: 84,
+    role: "Iron Player",
+    team: findPlayerTeam("Kåre Nivå fra Duvå", "Team ukendt"),
+    img: "images/kaare.jpg",
+    move: "Water Hazard",
+    strength: "Stabil Bund",
+    weakness: "IPA",
+  },
+  {
+    name: "Hyggestoppet",
+    rating: 81,
+    role: "Referee",
+    team: "Dommerholdet",
+    img: "images/mads.jpg",
+    move: "Rulebook",
+    strength: "Saunamania",
+    weakness: "Vodka Vand",
+  },
+  {
+    name: "Pony Toby",
+    rating: 89,
+    role: "Captain",
+    team: "The Lords of Beerkstein",
+    img: "images/tobias.jpg",
+    move: "Shotgun",
+    strength: "Hyggestop",
+    weakness: "Sauna Mania",
+  },
+  {
+    name: "Praktikanten",
+    rating: 81,
+    role: "Referee",
+    team: "Dommerholdet",
+    img: "images/victor.jpg",
+    move: "Yellow Card",
+    strength: "Tequila Shots",
+    weakness: "Bund en øl",
+  },
+  {
+    name: "Victatoren",
+    rating: 83,
+    role: "Wildcard",
+    team: findPlayerTeam("Victatoren", "Team ukendt"),
+    img: "images/kramp.jpg",
+    move: "Chaos Card",
+    strength: "Tid mod timing",
+    weakness: "Blind Beer",
+  },
+];
+
+const playerGrid = document.querySelector("#playerGrid");
+
+if (playerGrid) {
+  players.forEach((player) => {
+    playerGrid.insertAdjacentHTML(
+      "beforeend",
+      `
+        <article
+          class="player-card"
+          tabindex="0"
+          aria-label="${player.name}"
+        >
+          <div class="player-card-inner">
+            <div class="player-front">
+              <div class="player-top">
+                <div>
+                  <span class="player-rating">
+                    ${player.rating}
+                  </span>
+
+                  <span class="player-role">
+                    ${player.role}
+                  </span>
+                </div>
+
+                <span class="flag">🇩🇰</span>
+              </div>
+
+              <img
+                src="${player.img}"
+                alt="${player.name}"
+                class="player-img"
+              >
+
+              <div class="player-name">
+                ${player.name}
+              </div>
+
+              <div class="player-badge">
+                <i class="fa-solid fa-beer-mug-empty"></i>
+              </div>
+            </div>
+
+            <div class="player-back">
+              <h3>${player.name}</h3>
+
+              <p>
+                <strong>Hold</strong><br>
+                ${player.team}
+              </p>
+
+              <p>
+                <strong>Special move</strong><br>
+                ${player.move}
+              </p>
+
+              <p>
+                <strong>Styrke</strong><br>
+                ${player.strength}
+              </p>
+
+              <p>
+                <strong>Svaghed</strong><br>
+                ${player.weakness}
+              </p>
+            </div>
+          </div>
+        </article>
+      `,
+    );
+  });
+
+  document.querySelectorAll(".player-card").forEach((card) => {
+    card.addEventListener("click", () => {
+      card.classList.toggle("flipped");
+    });
+
+    card.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        card.classList.toggle("flipped");
+      }
+    });
+  });
+}
+
+/* =========================
+   MEDIEVAL DINNER
+========================= */
 
 const dinnerUnlockDate = new Date("2026-07-10T19:30:00+02:00").getTime();
 
-function updateDinnerCountdown() {
-  const now = Date.now();
-  const distance = dinnerUnlockDate - now;
+let dinnerCountdownInterval;
 
+function updateDinnerCountdown() {
   const locked = document.querySelector("#dinnerLocked");
+
   const unlocked = document.querySelector("#dinnerUnlocked");
 
   if (!locked || !unlocked) return;
 
+  const distance = dinnerUnlockDate - Date.now();
+
   if (distance <= 0) {
     locked.classList.add("hidden");
     unlocked.classList.remove("hidden");
+
+    clearInterval(dinnerCountdownInterval);
     return;
   }
 
-  document.querySelector("#dinnerDays").textContent = Math.floor(distance / (1000 * 60 * 60 * 24));
-  document.querySelector("#dinnerHours").textContent = Math.floor((distance / (1000 * 60 * 60)) % 24)
-    .toString()
-    .padStart(2, "0");
-  document.querySelector("#dinnerMinutes").textContent = Math.floor((distance / (1000 * 60)) % 60)
-    .toString()
-    .padStart(2, "0");
-  document.querySelector("#dinnerSeconds").textContent = Math.floor((distance / 1000) % 60)
-    .toString()
-    .padStart(2, "0");
+  const daysElement = document.querySelector("#dinnerDays");
+
+  const hoursElement = document.querySelector("#dinnerHours");
+
+  const minutesElement = document.querySelector("#dinnerMinutes");
+
+  const secondsElement = document.querySelector("#dinnerSeconds");
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+  const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+
+  const minutes = Math.floor((distance / (1000 * 60)) % 60);
+
+  const seconds = Math.floor((distance / 1000) % 60);
+
+  if (daysElement) {
+    daysElement.textContent = String(days).padStart(2, "0");
+  }
+
+  if (hoursElement) {
+    hoursElement.textContent = String(hours).padStart(2, "0");
+  }
+
+  if (minutesElement) {
+    minutesElement.textContent = String(minutes).padStart(2, "0");
+  }
+
+  if (secondsElement) {
+    secondsElement.textContent = String(seconds).padStart(2, "0");
+  }
 }
 
 updateDinnerCountdown();
-setInterval(updateDinnerCountdown, 1000);
 
-const saveTeamsBtn = document.querySelector("#saveTeamsBtn");
-
-saveTeamsBtn.addEventListener("click", () => {
-  localStorage.setItem("pgTeams", JSON.stringify(teams));
-  alert("Holdene er gemt! Gå tilbage til forsiden og refresh siden.");
-});
+dinnerCountdownInterval = setInterval(updateDinnerCountdown, 1000);
