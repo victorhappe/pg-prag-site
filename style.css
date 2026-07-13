@@ -1137,3 +1137,167 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+.winner-section {
+  text-align: center;
+  background: radial-gradient(circle at top, rgba(245, 193, 93, 0.2), transparent 40%), #0c0a09;
+}
+
+.champion-card {
+  max-width: 950px;
+  margin: auto;
+  padding: 45px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 30px;
+  align-items: center;
+  text-align: left;
+  border: 2px solid #f5c15d;
+  border-radius: 32px;
+  background: linear-gradient(135deg, rgba(245, 193, 93, 0.18), transparent), #211a17;
+  box-shadow:
+    0 0 45px rgba(245, 193, 93, 0.18),
+    0 30px 70px rgba(0, 0, 0, 0.45);
+}
+
+.champion-trophy {
+  font-size: clamp(5rem, 12vw, 9rem);
+}
+
+.champion-label {
+  margin: 0;
+  color: #f5c15d;
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+.champion-card h2 {
+  margin: 8px 0;
+  color: #f5c15d;
+}
+
+.champion-captain {
+  font-weight: 900;
+}
+
+.champion-text {
+  color: #d7cdc4;
+  line-height: 1.6;
+}
+
+.recap-stats {
+  max-width: 950px;
+  margin: 28px auto 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.recap-stats article {
+  padding: 22px;
+  border-radius: 20px;
+  background: #211a17;
+  border: 1px solid rgba(245, 193, 93, 0.22);
+}
+
+.recap-stats strong,
+.recap-stats span {
+  display: block;
+}
+
+.recap-stats strong {
+  color: #f5c15d;
+  font-size: 2.4rem;
+}
+
+.recap-stats span {
+  margin-top: 6px;
+  color: #b8aaa0;
+}
+
+.final-leaderboard {
+  display: grid;
+  gap: 16px;
+}
+
+.final-team {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 20px;
+  align-items: center;
+  padding: 22px;
+  border-radius: 22px;
+  background: #211a17;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.final-team h3,
+.final-team p {
+  margin: 4px 0;
+}
+
+.final-team h3,
+.final-team strong {
+  color: #f5c15d;
+}
+
+.final-placement {
+  font-size: 2.5rem;
+}
+
+.first-place {
+  border: 2px solid #f5c15d;
+  box-shadow: 0 0 30px rgba(245, 193, 93, 0.16);
+}
+
+.memories-section {
+  background: #0c0a09;
+}
+
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.memory-card {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #211a17;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.memory-card img {
+  width: 100%;
+  height: 280px;
+  display: block;
+  object-fit: cover;
+}
+
+.memory-card figcaption {
+  padding: 16px;
+  color: #f5c15d;
+  font-weight: 900;
+}
+
+.large-memory {
+  grid-column: span 2;
+}
+
+@media (max-width: 800px) {
+  .champion-card,
+  .final-team {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .recap-stats,
+  .memory-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .large-memory {
+    grid-column: auto;
+  }
+}

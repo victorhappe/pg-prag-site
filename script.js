@@ -850,3 +850,6 @@ if (hideAnswersBtn) {
     quizJudgeBtn?.classList.remove("hidden");
   });
 }
+
+renderRoute();
+loadPgRouteMap();

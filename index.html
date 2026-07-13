@@ -2,225 +2,242 @@
 <html lang="da">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PG Prag 2026</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description"
+    content="Det officielle tilbageblik på PG Prag 2026 – vindere, hold, resultater, rute og minder fra turen.">
+
+  <title>PG Prag 2026 · Recap</title>
+
+  <link rel="stylesheet" href="style.css">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
 </head>
 
 <body>
+
+  <!-- HEADER -->
   <header class="site-header">
-    <a href="#home" class="logo">PG PRAG</a>
-    <button class="menu-btn" aria-label="Åbn menu">☰</button>
+    <a href="#home" class="logo">
+      PG PRAG
+    </a>
+
+    <button class="menu-btn" type="button" aria-label="Åbn menu" aria-expanded="false">
+      ☰
+    </button>
+
     <nav class="nav">
-      <a href="#fredag">Fredag</a>
-      <a href="#loerdag">Lørdag</a>
-      <a href="#hold">Hold</a>
-      <a href="#games">P Games</a>
+      <a href="#winner">Vinderen</a>
+      <a href="#leaderboard">Slutstilling</a>
+      <a href="#hold">Holdene</a>
       <a href="#skattejagt">Skattejagt</a>
-      <a href="#participants">
-        <i class="fa-solid fa-users"></i> PG Deltagere
-      </a>
-      <a href="#pubquiz">
-        <i class="fa-solid fa-circle-question"></i> Pub Quiz
-      </a>
-      <a href="teams.html">Spin Teams</a>
+      <a href="#weekend">Weekenden</a>
+      <a href="#loerdag">PG-ruten</a>
+      <a href="#games">P Games</a>
+      <a href="#participants">Deltagere</a>
+      <a href="#memories">Minder</a>
+
       <a href="https://open.spotify.com/playlist/5FTdcrI0ut4DppjzQQKWPj?si=WfDNHg0nTfiheeEJktAtrw" target="_blank"
-        class="spotify-link">
-        <i class="fa-brands fa-spotify"></i> PG Soundtrack
+        rel="noopener noreferrer" class="spotify-link">
+        <i class="fa-brands fa-spotify"></i>
+        Soundtrack
       </a>
     </nav>
   </header>
 
+
   <main id="home">
+
+    <!-- HERO -->
     <section class="hero">
       <div class="hero-overlay">
-        <p class="eyebrow">The official pub golf championship</p>
+        <p class="eyebrow">
+          The official PG Prag 2026 recap
+        </p>
+
         <h1>PG Prag 2026</h1>
-        <p>11 drenge. 3 hold. Én by. Én vinder.</p>
-        <a href="#countdown" class="btn">Se countdown</a>
+
+        <p>
+          11 drenge. 3 hold. Én legendarisk weekend.
+        </p>
+
+        <a href="#winner" class="btn">
+          Se vinderne
+        </a>
       </div>
     </section>
 
-    <section id="countdown" class="section countdown-section">
-      <p class="eyebrow">Lørdag d. 11. juli kl. 12:00</p>
-      <h2>PG starter om</h2>
-      <div class="countdown">
-        <div><span id="days">00</span>
-          <p>Dage</p>
+
+    <!-- VINDER -->
+    <section id="winner" class="section winner-section">
+      <p class="eyebrow">
+        PG Prag 2026 · Final result
+      </p>
+
+      <div class="champion-card">
+        <div class="champion-trophy" aria-hidden="true">
+          🏆
         </div>
-        <div><span id="hours">00</span>
-          <p>Timer</p>
+
+        <div class="champion-content">
+          <p class="champion-label">
+            PG PRAG CHAMPIONS
+          </p>
+
+          <h2>The Drunken Archers</h2>
+
+          <p class="champion-captain">
+            Kaptajn: August “Lithium”
+          </p>
+
+          <p class="champion-text">
+            The Drunken Archers vandt PG Prag 2026 og kan officielt
+            kalde sig årets mestre.
+          </p>
         </div>
-        <div><span id="minutes">00</span>
-          <p>Minutter</p>
-        </div>
-        <div><span id="seconds">00</span>
-          <p>Sekunder</p>
-        </div>
+      </div>
+
+      <div class="recap-stats">
+        <article>
+          <strong>11</strong>
+          <span>Deltagere</span>
+        </article>
+
+        <article>
+          <strong>3</strong>
+          <span>Hold</span>
+        </article>
+
+        <article>
+          <strong>9</strong>
+          <span>PG-stop</span>
+        </article>
+
+        <article>
+          <strong>1</strong>
+          <span>Vinderhold</span>
+        </article>
       </div>
     </section>
 
+
+    <!-- SLUTSTILLING -->
     <section id="leaderboard" class="section leaderboard-section">
-      <p class="eyebrow">Live status</p>
-      <h2>Leaderboard</h2>
+      <p class="eyebrow">
+        Final standings
+      </p>
 
-      <div class="leaderboard">
-        <article class="leader-card">
-          <h3>🏆 Dirty TwoKnights</h3>
-          <p><span id="team1Points">0</span> PGP</p>
-          <button class="small-btn" onclick="changePoints('team1', 1)">+1</button>
-          <button class="small-btn" onclick="changePoints('team1', -1)">-1</button>
+      <h2>Slutstillingen</h2>
+
+      <div class="final-leaderboard">
+
+        <article class="final-team first-place">
+          <div class="final-placement" aria-hidden="true">
+            🥇
+          </div>
+
+          <div>
+            <h3>The Drunken Archers</h3>
+            <p>Kaptajn: August “Lithium”</p>
+          </div>
+
+          <strong>PG Champions</strong>
         </article>
 
-        <article class="leader-card">
-          <h3>🎯 The Drunken Archers</h3>
-          <p><span id="team2Points">0</span> PGP</p>
-          <button class="small-btn" onclick="changePoints('team2', 1)">+1</button>
-          <button class="small-btn" onclick="changePoints('team2', -1)">-1</button>
+        <article class="final-team second-place">
+          <div class="final-placement" aria-hidden="true">
+            🥈
+          </div>
+
+          <div>
+            <h3>Dirty TwoKnights</h3>
+            <p>Kaptajn: Alfred Spikes</p>
+          </div>
+
+          <strong>2. plads</strong>
         </article>
 
-        <article class="leader-card">
-          <h3>🍺 The lords of beerkstein</h3>
-          <p><span id="team3Points">0</span> PGP</p>
-          <button class="small-btn" onclick="changePoints('team3', 1)">+1</button>
-          <button class="small-btn" onclick="changePoints('team3', -1)">-1</button>
+        <article class="final-team third-place">
+          <div class="final-placement" aria-hidden="true">
+            🥉
+          </div>
+
+          <div>
+            <h3>The Lords of Beerkstein</h3>
+            <p>Kaptajn: Pony Toby</p>
+          </div>
+
+          <strong>3. plads</strong>
         </article>
+
       </div>
     </section>
 
-    <section id="participants" class="section participants-section">
-      <p class="eyebrow">Hall of Fame</p>
-      <h2>PG Deltagere</h2>
-      <p class="section-intro">11 legender. 3 hold. 1 mission.</p>
 
-      <div class="player-grid" id="playerGrid"></div>
-    </section>
-
-    <section class="section random-section">
-      <p class="eyebrow">Emergency game</p>
-      <h2>Random Challenge</h2>
-      <button class="btn" id="randomGameBtn">Træk en challenge</button>
-      <div id="randomGameResult" class="random-result">🎲 Klar?</div>
-    </section>
-
-    <section class="section warning">
-      <h2>Disclaimer</h2>
-      <p>Selvrisiko på skade af Airbnb + ingen stive i poolen + ingen drinks på poolbordet.</p>
-    </section>
-
-    <section id="fredag" class="section">
-      <p class="eyebrow">Dag 1</p>
-      <h2>Fredag</h2>
-      <div class="timeline">
-        <article class="timeline-card"><span>10:00</span>
-          <h3>Københavns Lufthavn</h3>
-          <p>Øl i lufthavnen.</p>
-        </article>
-        <article class="timeline-card"><span>Ca. 15:00</span>
-          <h3>Ankomst i suiten</h3>
-          <p>Holdkaptajner og teammaking.</p>
-        </article>
-        <article class="timeline-card"><span>ASAP – 19:45</span>
-          <h3>Kostume, holdvideo og skattejagt</h3>
-          <p>Minuspoint pr. minut forsinket. Happe og Mads køber ind og pynter op.</p>
-        </article>
-        <article class="timeline-card dinner-card" id="dinnerCard">
-          <span>20:00</span>
-          <h3>Secret Dinner</h3>
-
-          <div id="dinnerLocked">
-            <p>Eventet låses op kl. 19:30 d. 10. juli.</p>
-
-            <div class="mini-countdown">
-              <div><strong id="dinnerDays">00</strong><small>Dage</small></div>
-              <div><strong id="dinnerHours">00</strong><small>Timer</small></div>
-              <div><strong id="dinnerMinutes">00</strong><small>Min</small></div>
-              <div><strong id="dinnerSeconds">00</strong><small>Sek</small></div>
-            </div>
-          </div>
-
-          <div id="dinnerUnlocked" class="hidden">
-            <p>Medieval Dinner - U Pavouka Medieval Tavern</p>
-            <p>2.5h performance - 5 course meal - All you can drink</p>
-            <a class="btn" target="_blank"
-              href="https://www.google.com/maps/search/?api=1&query=U%20Pavouka%20Medieval%20Tavern%20Prague">
-              Se koordinater
-            </a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="loerdag" class="section secret-section">
-      <p class="eyebrow">Dag 2</p>
-      <h2>Lørdag</h2>
-
-      <div class="judge-access">
-        <div class="judge-locked" id="judgeLocked">
-          <div class="lock">🔒</div>
-          <h3>Dommer-adgang</h3>
-          <p>Kun dommerholdet kan se den fulde PG-rute.</p>
-          <button class="btn" id="judgeBtn">Lås ruten op</button>
-        </div>
-
-        <div id="judgePanel" class="judge-route hidden">
-          <div class="route-header">
-            <div>
-              <p class="eyebrow">Secret Course Map</p>
-              <h3>PG-ruten</h3>
-              <p>Airbnb → barer → Airbnb afterparty</p>
-            </div>
-
-            <a href="#" target="_blank" id="mapsLink" class="btn">
-              Åbn i Google Maps
-            </a>
-          </div>
-
-          <div class="route-layout">
-            <div id="pgMap" class="pg-map"></div>
-            <div class="route-list" id="routeList"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
+    <!-- HOLD -->
     <section id="hold" class="section">
-      <p class="eyebrow">Teams</p>
+      <p class="eyebrow">
+        The teams
+      </p>
+
       <h2>Holdene</h2>
 
       <div class="cards three">
 
-        <article class="card team-card">
-          <h3>🏆 Dirty TwoKnights</h3>
-          <p class="captain">Kaptajn: Alfred Spikes</p>
+        <article class="card team-card second-place-card">
+          <div class="team-placement">
+            🥈 2. plads
+          </div>
+
+          <h3>Dirty TwoKnights</h3>
+
+          <p class="captain">
+            Kaptajn: Alfred Spikes
+          </p>
 
           <ul class="team-list">
-            <li>👤 Alfred Spikes</li>
-            <li>👤 Dirty Haslund</li>
+            <li>👑 Alfred Spikes</li>
+            <li>👤 Dirty Hashlund</li>
             <li>👤 Victatoren</li>
           </ul>
         </article>
 
-        <article class="card team-card">
-          <h3>🎯 The Drunken Archers</h3>
-          <p class="captain">Kaptajn: Lithium</p>
+
+        <article class="card team-card winning-team-card">
+          <div class="team-placement">
+            🏆 PG Champions
+          </div>
+
+          <h3>The Drunken Archers</h3>
+
+          <p class="captain">
+            Kaptajn: Lithium
+          </p>
 
           <ul class="team-list">
-            <li>👤 Lithium</li>
+            <li>👑 Lithium</li>
             <li>👤 Joey</li>
             <li>👤 Kåre Nivå fra Duvå</li>
           </ul>
         </article>
 
-        <article class="card team-card">
-          <h3>🍺 The lords of beerkstein</h3>
-          <p class="captain">Kaptajn: Pony Toby</p>
+
+        <article class="card team-card third-place-card">
+          <div class="team-placement">
+            🥉 3. plads
+          </div>
+
+          <h3>The Lords of Beerkstein</h3>
+
+          <p class="captain">
+            Kaptajn: Pony Toby
+          </p>
 
           <ul class="team-list">
-            <li>👤 Pony Toby</li>
+            <li>👑 Pony Toby</li>
             <li>👤 Dobbelt Felix</li>
             <li>👤 14</li>
           </ul>
@@ -229,50 +246,31 @@
       </div>
     </section>
 
-    <section id="games" class="section dark">
-      <p class="eyebrow">Challenges</p>
-      <h2>P Games</h2>
-      <div class="game-grid" id="gameGrid"></div>
-    </section>
 
-    <section id="pubquiz" class="section pubquiz-section">
-      <p class="eyebrow">Stop 6</p>
-      <h2>PG Pub Quiz</h2>
-
-      <p class="quiz-intro">
-        Skriv ét svar pr. hold. Dommerne afslører facit efter hvert spørgsmål.
+    <!-- SKATTEJAGT -->
+    <section id="skattejagt" class="section treasure-results">
+      <p class="eyebrow">
+        Treasure hunt · Final results
       </p>
 
-      <div id="quizList" class="quiz-list"></div>
-
-      <div class="quiz-judge-box">
-        <div class="lock">🔒</div>
-        <h3>Dommerfacit</h3>
-        <p>Kun dommerne kan åbne svarene.</p>
-
-        <button class="btn" id="quizJudgeBtn">
-          Åbn facit
-        </button>
-
-        <button class="btn secondary-btn hidden" id="hideAnswersBtn">
-          Skjul facit
-        </button>
-      </div>
-    </section>
-
-    <section id="skattejagt" class="section treasure-results">
-      <p class="eyebrow">Final results</p>
-      <h2>Skattejagten er afsluttet</h2>
+      <h2>Skattejagten</h2>
 
       <p class="results-intro">
         60 challenges. 3 hold. Én vinder.
       </p>
 
       <div class="podium-grid">
+
         <article class="result-card winner-card">
-          <div class="placement">🥇 1. plads</div>
+          <div class="placement">
+            🥇 1. plads
+          </div>
+
           <h3>The Drunken Archers</h3>
-          <p class="captain-name">Kaptajn: August / Lithium</p>
+
+          <p class="captain-name">
+            Kaptajn: August “Lithium”
+          </p>
 
           <div class="result-score">
             <strong>40</strong>
@@ -281,17 +279,28 @@
 
           <p>Challenges completed</p>
 
-          <div class="result-progress">
+          <div class="result-progress" role="progressbar"
+            aria-label="The Drunken Archers gennemførte 40 ud af 60 challenges" aria-valuemin="0" aria-valuemax="60"
+            aria-valuenow="40">
             <div style="width: 66.67%"></div>
           </div>
 
-          <p class="result-percent">66,7 % gennemført</p>
+          <p class="result-percent">
+            66,7 % gennemført
+          </p>
         </article>
 
+
         <article class="result-card second-card">
-          <div class="placement">🥈 2. plads</div>
+          <div class="placement">
+            🥈 2. plads
+          </div>
+
           <h3>Dirty TwoKnights</h3>
-          <p class="captain-name">Kaptajn: Alfred Spikes</p>
+
+          <p class="captain-name">
+            Kaptajn: Alfred Spikes
+          </p>
 
           <div class="result-score">
             <strong>36</strong>
@@ -300,17 +309,28 @@
 
           <p>Challenges completed</p>
 
-          <div class="result-progress">
+          <div class="result-progress" role="progressbar"
+            aria-label="Dirty TwoKnights gennemførte 36 ud af 60 challenges" aria-valuemin="0" aria-valuemax="60"
+            aria-valuenow="36">
             <div style="width: 60%"></div>
           </div>
 
-          <p class="result-percent">60 % gennemført</p>
+          <p class="result-percent">
+            60 % gennemført
+          </p>
         </article>
 
+
         <article class="result-card third-card">
-          <div class="placement">🥉 3. plads</div>
+          <div class="placement">
+            🥉 3. plads
+          </div>
+
           <h3>The Lords of Beerkstein</h3>
-          <p class="captain-name">Kaptajn: Pony Toby</p>
+
+          <p class="captain-name">
+            Kaptajn: Pony Toby
+          </p>
 
           <div class="result-score">
             <strong>28</strong>
@@ -319,41 +339,363 @@
 
           <p>Challenges completed</p>
 
-          <div class="result-progress">
+          <div class="result-progress" role="progressbar"
+            aria-label="The Lords of Beerkstein gennemførte 28 ud af 60 challenges" aria-valuemin="0" aria-valuemax="60"
+            aria-valuenow="28">
             <div style="width: 46.67%"></div>
           </div>
 
-          <p class="result-percent">46,7 % gennemført</p>
+          <p class="result-percent">
+            46,7 % gennemført
+          </p>
         </article>
+
       </div>
 
       <div class="winner-banner">
-        <span>🏆</span>
+        <span aria-hidden="true">🏆</span>
+
         <div>
-          <p class="eyebrow">Treasure Hunt Champions</p>
+          <p class="eyebrow">
+            Treasure Hunt Champions
+          </p>
+
           <h3>The Drunken Archers</h3>
-          <p>Vinder skattejagten med 40 gennemførte challenges.</p>
+
+          <p>
+            Vinder skattejagten med 40 gennemførte challenges.
+          </p>
         </div>
       </div>
     </section>
+
+
+    <!-- WEEKENDEN -->
+    <section id="weekend" class="section weekend-section">
+      <p class="eyebrow">
+        The weekend
+      </p>
+
+      <h2>Sådan forløb turen</h2>
+
+      <div class="day-recap-grid">
+
+        <!-- FREDAG -->
+        <article id="fredag" class="day-recap-card">
+          <div class="day-heading">
+            <p class="eyebrow">Dag 1</p>
+            <h3>Fredag</h3>
+          </div>
+
+          <div class="timeline">
+
+            <article class="timeline-card">
+              <span>10:00</span>
+              <h3>Københavns Lufthavn</h3>
+              <p>
+                Turen begyndte med den obligatoriske lufthavnsøl.
+              </p>
+            </article>
+
+            <article class="timeline-card">
+              <span>Ca. 15:00</span>
+              <h3>Ankomst til suiten</h3>
+              <p>
+                Check-in, holdfordeling og de første forberedelser.
+              </p>
+            </article>
+
+            <article class="timeline-card">
+              <span>Eftermiddag</span>
+              <h3>Kostumer og skattejagt</h3>
+              <p>
+                Holdene udforskede Prag og kæmpede om de første point.
+              </p>
+            </article>
+
+            <article class="timeline-card dinner-card">
+              <span>20:00</span>
+              <h3>Medieval Dinner</h3>
+
+              <p>
+                U Pavouka Medieval Tavern
+              </p>
+
+              <p>
+                2,5 timers show, fem retter og all you can drink.
+              </p>
+
+              <a class="btn" target="_blank" rel="noopener noreferrer"
+                href="https://www.google.com/maps/search/?api=1&query=U%20Pavouka%20Medieval%20Tavern%20Prague">
+                Se stedet
+              </a>
+            </article>
+
+          </div>
+        </article>
+
+
+        <!-- LØRDAG -->
+        <article class="day-recap-card">
+          <div class="day-heading">
+            <p class="eyebrow">Dag 2</p>
+            <h3>Lørdag</h3>
+          </div>
+
+          <div class="timeline">
+
+            <article class="timeline-card">
+              <span>09:00–11:00</span>
+              <h3>Morgenmad og klargøring</h3>
+              <p>
+                Holdene gjorde sig klar til den officielle PG-rute.
+              </p>
+            </article>
+
+            <article class="timeline-card">
+              <span>12:00</span>
+              <h3>PG Start</h3>
+              <p>
+                Holdvideoer, skattejagtsresultater og starten på første hul.
+              </p>
+            </article>
+
+            <article class="timeline-card">
+              <span>Eftermiddag</span>
+              <h3>Pub Golf gennem Prag</h3>
+              <p>
+                Ni stop, forskellige P Games og en rute gennem centrum.
+              </p>
+            </article>
+
+            <article class="timeline-card">
+              <span>Sen aften</span>
+              <h3>Afterparty og vindere</h3>
+              <p>
+                Ruten sluttede i suiten, hvor The Drunken Archers
+                blev kåret som PG Prag 2026-vindere.
+              </p>
+            </article>
+
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+
+    <!-- RUTEN -->
+    <section id="loerdag" class="section route-section">
+      <p class="eyebrow">
+        The official course
+      </p>
+
+      <h2>PG-ruten gennem Prag</h2>
+
+      <div class="judge-route">
+
+        <div class="route-header">
+          <div>
+            <p class="eyebrow">
+              Prague Course Map
+            </p>
+
+            <h3>9 stop gennem Prag</h3>
+
+            <p>
+              Fra suiten, gennem Prags barer og tilbage til afterparty.
+            </p>
+          </div>
+
+          <a href="#" target="_blank" rel="noopener noreferrer" id="mapsLink" class="btn">
+            Åbn ruten
+          </a>
+        </div>
+
+        <div class="route-layout">
+          <div id="pgMap" class="pg-map" aria-label="Kort over PG-ruten gennem Prag"></div>
+
+          <div class="route-list" id="routeList"></div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- P GAMES -->
+    <section id="games" class="section dark">
+      <p class="eyebrow">
+        The challenges
+      </p>
+
+      <h2>P Games</h2>
+
+      <p class="section-description">
+        Et tilbageblik på spillene og udfordringerne fra PG-ruten.
+      </p>
+
+      <div class="game-grid" id="gameGrid"></div>
+    </section>
+
+
+    <!-- PUBQUIZ -->
+    <section id="pubquiz" class="section pubquiz-section">
+      <p class="eyebrow">
+        Stop 6
+      </p>
+
+      <h2>PG Pub Quiz</h2>
+
+      <p class="quiz-intro">
+        De 10 spørgsmål fra pubquizzen om Prag.
+        Facit kan stadig åbnes med dommerkoden.
+      </p>
+
+      <div id="quizList" class="quiz-list"></div>
+
+      <div class="quiz-judge-box">
+        <div class="lock" aria-hidden="true">
+          🔒
+        </div>
+
+        <h3>Dommerfacit</h3>
+
+        <p>
+          Åbn svarene og se, hvor mange I stadig kan huske.
+        </p>
+
+        <button class="btn" type="button" id="quizJudgeBtn">
+          Åbn facit
+        </button>
+
+        <button class="btn secondary-btn hidden" type="button" id="hideAnswersBtn">
+          Skjul facit
+        </button>
+      </div>
+    </section>
+
+
+    <!-- DELTAGERE -->
+    <section id="participants" class="section participants-section">
+      <p class="eyebrow">
+        Hall of Fame
+      </p>
+
+      <h2>PG Deltagere</h2>
+
+      <p class="section-intro">
+        11 legender. 3 hold. 1 mission.
+      </p>
+
+      <div class="player-grid" id="playerGrid"></div>
+
+      <p class="flip-help">
+        Tryk på et kort for at vende det
+      </p>
+    </section>
+
+
+    <!-- MINDER -->
+    <section id="memories" class="section memories-section">
+      <p class="eyebrow">
+        Weekend archive
+      </p>
+
+      <h2>Bedste øjeblikke</h2>
+
+      <p class="section-description">
+        Et udvalg af minder fra PG Prag 2026.
+      </p>
+
+      <div class="memory-grid">
+
+        <figure class="memory-card large-memory">
+          <img src="images/pg-gruppe.jpg" alt="Hele PG-gruppen samlet i Prag" loading="lazy">
+
+          <figcaption>
+            PG Prag 2026
+          </figcaption>
+        </figure>
+
+
+        <figure class="memory-card">
+          <img src="images/memory-1.jpg" alt="Billede fra den første aften i Prag" loading="lazy">
+
+          <figcaption>
+            Første aften i Prag
+          </figcaption>
+        </figure>
+
+
+        <figure class="memory-card">
+          <img src="images/memory-2.jpg" alt="Billede fra skattejagten gennem Prag" loading="lazy">
+
+          <figcaption>
+            Skattejagten gennem byen
+          </figcaption>
+        </figure>
+
+
+        <figure class="memory-card">
+          <img src="images/memory-3.jpg" alt="Billede fra en af PG-udfordringerne" loading="lazy">
+
+          <figcaption>
+            P Games på ruten
+          </figcaption>
+        </figure>
+
+
+        <figure class="memory-card">
+          <img src="images/memory-4.jpg" alt="The Drunken Archers efter sejren" loading="lazy">
+
+          <figcaption>
+            The Drunken Archers · PG Champions
+          </figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+
+    <!-- AFSLUTNING -->
+    <section class="section closing-section">
+      <div class="closing-card">
+        <span aria-hidden="true">🍻</span>
+
+        <div>
+          <p class="eyebrow">
+            Until next time
+          </p>
+
+          <h2>Tak for PG Prag 2026</h2>
+
+          <p>
+            En weekend med konkurrencer, kostumer, pub golf,
+            middelaldermiddag og questionable decisions.
+          </p>
+        </div>
+      </div>
+    </section>
+
   </main>
 
+
+  <!-- FOOTER -->
   <footer>
-    <p>PG Prag 2026 · Hosted by Happe & Mads</p>
+    <p>
+      PG Prag 2026 · Hosted by Happe & Mads
+    </p>
+
+    <p>
+      The Drunken Archers are champions 🏆
+    </p>
   </footer>
 
+
+  <!-- SCRIPTS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="script.js"></script>
-  <div id="pgStartOverlay" class="pg-start-overlay hidden">
-    <div id="confetti"></div>
-    <div id="beerRain"></div>
 
-    <div class="pg-start-box">
-      <h1>🍻</h1>
-      <h2>PG ER I GANG!</h2>
-      <p>GOOD LUCK GOLFERS</p>
-    </div>
-  </div>
 </body>
 
 </html>
